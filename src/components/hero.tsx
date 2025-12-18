@@ -6,19 +6,61 @@ import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
+import { useState, useEffect } from "react"
+import { AnimatePresence } from "framer-motion"
+
+const heroImages = [
+    {
+        src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+        alt: "Earth from space"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop",
+        alt: "Technology Chip"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop",
+        alt: "City skyline"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1548504778-944743c3ed9b?q=80&w=2070&auto=format&fit=crop",
+        alt: "Topographic map"
+    }
+]
+
 export function Hero() {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
+        }, 5000)
+        return () => clearInterval(interval)
+    }, [])
+
     return (
         <section className="relative h-screen min-h-[800px] w-full flex items-center justify-center overflow-hidden">
-            {/* Background Image with Overlay */}
+            {/* Background Image Slider */}
             <div className="absolute inset-0 z-0">
-                <Image
-                    src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
-                    alt="Earth from space"
-                    fill
-                    className="object-cover opacity-20 dark:opacity-10"
-                    priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/50 to-background" />
+                <AnimatePresence mode="popLayout">
+                    <motion.div
+                        key={currentImageIndex}
+                        initial={{ opacity: 0, scale: 1.1 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1.5 }}
+                        className="absolute inset-0"
+                    >
+                        <Image
+                            src={heroImages[currentImageIndex].src}
+                            alt={heroImages[currentImageIndex].alt}
+                            fill
+                            className="object-cover opacity-50 dark:opacity-40"
+                            priority={currentImageIndex === 0}
+                        />
+                    </motion.div>
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/50 to-background z-10" />
             </div>
 
             <div className="container relative z-10 mx-auto px-4 md:px-6 flex flex-col items-center text-center gap-8">
