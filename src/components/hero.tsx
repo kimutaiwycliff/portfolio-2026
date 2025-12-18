@@ -1,0 +1,112 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+
+export function Hero() {
+    return (
+        <section className="relative h-screen min-h-[800px] w-full flex items-center justify-center overflow-hidden">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
+                    alt="Earth from space"
+                    fill
+                    className="object-cover opacity-20 dark:opacity-10"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/50 to-background" />
+            </div>
+
+            <div className="container relative z-10 mx-auto px-4 md:px-6 flex flex-col items-center text-center gap-8">
+                {/* Profile Photo */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="relative w-40 h-40 md:w-52 md:h-52 rounded-full border-4 border-primary/20 shadow-xl overflow-hidden"
+                >
+                    {/* Placeholder for actual photo */}
+                    <div className="w-full h-full bg-muted flex items-center justify-center text-4xl font-bold text-muted-foreground">
+                        WK
+                    </div>
+                    {/* <Image 
+            src="/path-to-your-photo.jpg" 
+            alt="Wycliff Kimutai" 
+            fill 
+            className="object-cover"
+          /> */}
+                </motion.div>
+
+                {/* Content */}
+                <div className="max-w-3xl space-y-4">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent"
+                    >
+                        Geospatial Data Scientist <br className="hidden md:block" />
+                        <span className="text-foreground text-3xl md:text-5xl">& Full-Stack Developer</span>
+                    </motion.h1>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                        className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto"
+                    >
+                        Bridging spatial intelligence and AI to solve real-world challenges.
+                    </motion.p>
+                </div>
+
+                {/* CTAs */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    className="flex flex-col sm:flex-row gap-4"
+                >
+                    <Button size="lg" className="rounded-full text-lg h-12 px-8" asChild>
+                        <Link href="#projects">View Projects</Link>
+                    </Button>
+                    <Button size="lg" variant="outline" className="rounded-full text-lg h-12 px-8" asChild>
+                        <Link href="#contact">Contact Me</Link>
+                    </Button>
+                    <Button size="lg" variant="ghost" className="rounded-full h-12 w-12 p-0" asChild>
+                        <Link href="/cv.pdf" target="_blank" title="Download CV">
+                            <span className="sr-only">Download CV</span>
+                            {/* Replace with DownloadIcon if needed, standard usually file-text */}
+                            <span className="font-bold">CV</span>
+                        </Link>
+                    </Button>
+                </motion.div>
+
+                {/* Social Proof/Icons (Optional inline) */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.8 }}
+                    className="flex gap-6 text-muted-foreground mt-4"
+                >
+                    <Link href="https://github.com" target="_blank" className="hover:text-primary transition-colors"><Github className="w-6 h-6" /></Link>
+                    <Link href="https://linkedin.com" target="_blank" className="hover:text-primary transition-colors"><Linkedin className="w-6 h-6" /></Link>
+                    <Link href="mailto:kimutaiwycliff90@gmail.com" className="hover:text-primary transition-colors"><Mail className="w-6 h-6" /></Link>
+                </motion.div>
+            </div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, y: [0, 10, 0] }}
+                transition={{ duration: 2, delay: 1, repeat: Infinity }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 text-muted-foreground"
+            >
+                <ArrowDown className="w-8 h-8" />
+            </motion.div>
+        </section>
+    )
+}
