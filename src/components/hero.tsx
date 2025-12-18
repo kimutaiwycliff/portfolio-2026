@@ -23,8 +23,8 @@ const heroImages = [
         alt: "City skyline"
     },
     {
-        src: "https://images.unsplash.com/photo-1548504778-944743c3ed9b?q=80&w=2070&auto=format&fit=crop",
-        alt: "Topographic map"
+        src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+        alt: "Data Analytics Visualization"
     }
 ]
 
