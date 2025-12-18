@@ -32,7 +32,7 @@ export const projects: Project[] = [
         description: "Machine learning framework predicting urban water demand using Artificial Neural Networks and climatic data.",
         category: "ML",
         technologies: ["Python", "TensorFlow", "Pandas", "Matplotlib"],
-        imageUrl: "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=2070&auto=format&fit=crop", // Data/AI
+        imageUrl: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=2074&auto=format&fit=crop", // Data/AI
         githubUrl: "https://github.com/wycliffkimutai",
         featured: true,
         date: "2024"
@@ -64,7 +64,7 @@ export const projects: Project[] = [
         description: "High-performance spatial data infrastructure deployment handling significant concurrent request loads.",
         category: "DevOps",
         technologies: ["Docker", "Kubernetes", "GeoServer", "Nginx"],
-        imageUrl: "https://images.unsplash.com/photo-1558494949-efc5270f9c01?q=80&w=2069&auto=format&fit=crop", // Servers
+        imageUrl: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2051&auto=format&fit=crop", // Servers
         githubUrl: "https://github.com/wycliffkimutai",
         featured: true,
         date: "2023"

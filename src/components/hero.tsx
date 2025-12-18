@@ -33,12 +33,12 @@ export function Hero() {
                     <div className="w-full h-full bg-muted flex items-center justify-center text-4xl font-bold text-muted-foreground">
                         WK
                     </div>
-                    {/* <Image 
-            src="/path-to-your-photo.jpg" 
-            alt="Wycliff Kimutai" 
-            fill 
-            className="object-cover"
-          /> */}
+                    <Image
+                        src="/profile.jpeg"
+                        alt="Wycliff Kimutai"
+                        fill
+                        className="object-cover"
+                    />
                 </motion.div>
 
                 {/* Content */}
