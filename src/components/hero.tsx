@@ -9,24 +9,8 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { AnimatePresence } from "framer-motion"
 
-const heroImages = [
-    {
-        src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
-        alt: "Earth from space"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop",
-        alt: "Technology Chip"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2070&auto=format&fit=crop",
-        alt: "City skyline"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-        alt: "Data Analytics Visualization"
-    }
-]
+import { heroImages, profileImage } from "@/data/images"
+import { socialLinks } from "@/data/socials"
 
 export function Hero() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -76,8 +60,8 @@ export function Hero() {
                         WK
                     </div>
                     <Image
-                        src="/profile.jpeg"
-                        alt="Wycliff Kimutai"
+                        src={profileImage.src}
+                        alt={profileImage.alt}
                         fill
                         className="object-cover"
                     />
@@ -134,9 +118,16 @@ export function Hero() {
                     transition={{ duration: 0.5, delay: 0.8 }}
                     className="flex gap-6 text-muted-foreground mt-4"
                 >
-                    <Link href="https://github.com" target="_blank" className="hover:text-primary transition-colors"><Github className="w-6 h-6" /></Link>
-                    <Link href="https://linkedin.com" target="_blank" className="hover:text-primary transition-colors"><Linkedin className="w-6 h-6" /></Link>
-                    <Link href="mailto:kimutaiwycliff90@gmail.com" className="hover:text-primary transition-colors"><Mail className="w-6 h-6" /></Link>
+                    {socialLinks.map((social) => (
+                        <Link
+                            key={social.name}
+                            href={social.url}
+                            target="_blank"
+                            className="hover:text-primary transition-colors"
+                        >
+                            <social.icon className="w-6 h-6" />
+                        </Link>
+                    ))}
                 </motion.div>
             </div>
 

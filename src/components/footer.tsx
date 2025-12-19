@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { socialLinks } from "@/data/socials"
 
 export function Footer() {
     return (
@@ -10,31 +10,18 @@ export function Footer() {
                 </p>
 
                 <div className="flex items-center gap-6">
-                    <Link
-                        href="https://github.com"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                        <Github className="h-5 w-5" />
-                        <span className="sr-only">GitHub</span>
-                    </Link>
-                    <Link
-                        href="https://linkedin.com"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                        <Linkedin className="h-5 w-5" />
-                        <span className="sr-only">LinkedIn</span>
-                    </Link>
-                    <Link
-                        href="mailto:kimutaiwycliff90@gmail.com"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                        <Mail className="h-5 w-5" />
-                        <span className="sr-only">Email</span>
-                    </Link>
+                    {socialLinks.map((social) => (
+                        <Link
+                            key={social.name}
+                            href={social.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                            <social.icon className="h-5 w-5" />
+                            <span className="sr-only">{social.name}</span>
+                        </Link>
+                    ))}
                 </div>
 
                 <p className="text-xs text-muted-foreground">

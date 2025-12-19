@@ -11,6 +11,7 @@ import { submitContactForm } from "@/actions/contact"
 import { toast } from "sonner"
 import { useEffect } from "react"
 import { Label } from "@/components/ui/label"
+import { contactDetails } from "@/data/contact"
 
 export function Contact() {
     const [state, formAction, isPending] = useActionState(submitContactForm, null)
@@ -47,8 +48,8 @@ export function Contact() {
                             </div>
                             <div>
                                 <h3 className="font-semibold mb-1">Email</h3>
-                                <a href="mailto:kimutaiwycliff90@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
-                                    kimutaiwycliff90@gmail.com
+                                <a href={`mailto:${contactDetails.email}`} className="text-muted-foreground hover:text-primary transition-colors">
+                                    {contactDetails.email}
                                 </a>
                             </div>
                         </div>
@@ -59,8 +60,8 @@ export function Contact() {
                             </div>
                             <div>
                                 <h3 className="font-semibold mb-1">Phone</h3>
-                                <a href="tel:+254716522948" className="text-muted-foreground hover:text-primary transition-colors">
-                                    +254 716 522 948
+                                <a href={`tel:${contactDetails.phone.replace(/\s/g, '')}`} className="text-muted-foreground hover:text-primary transition-colors">
+                                    {contactDetails.phone}
                                 </a>
                             </div>
                         </div>
@@ -71,7 +72,7 @@ export function Contact() {
                             </div>
                             <div>
                                 <h3 className="font-semibold mb-1">Location</h3>
-                                <p className="text-muted-foreground">Nairobi, Kenya</p>
+                                <p className="text-muted-foreground">{contactDetails.location}</p>
                             </div>
                         </div>
                     </div>
@@ -85,7 +86,7 @@ export function Contact() {
                             scrolling="no"
                             marginHeight={0}
                             marginWidth={0}
-                            src="https://www.openstreetmap.org/export/embed.html?bbox=36.7%2C-1.4%2C37.1%2C-1.1&amp;layer=mapnik&amp;marker=-1.2921%2C36.8219"
+                            src={contactDetails.mapUrl}
                             title="Nairobi Map"
                         ></iframe>
                     </div>
