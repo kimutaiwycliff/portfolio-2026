@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Menu } from "lucide-react"
 import { usePathname } from "next/navigation"
 
+import { useActiveSection } from "@/hooks/use-active-section"
 import { cn } from "@/lib/utils"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Button } from "@/components/ui/button"
@@ -28,6 +29,14 @@ const navItems = [
 export function Navigation() {
     const [isScrolled, setIsScrolled] = React.useState(false)
     const pathname = usePathname()
+    const activeSection = useActiveSection([
+        "home",
+        "about",
+        "skills",
+        "experience",
+        "projects",
+        "contact"
+    ])
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -63,7 +72,7 @@ export function Navigation() {
                             href={item.href}
                             className={cn(
                                 "text-sm font-medium transition-colors hover:text-primary relative group",
-                                pathname === item.href ? "text-primary" : "text-muted-foreground"
+                                (item.href === "/" && activeSection === "home") || item.href === `/#${activeSection}` ? "text-primary" : "text-muted-foreground"
                             )}
                         >
                             {item.name}

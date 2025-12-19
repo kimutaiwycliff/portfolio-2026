@@ -23,7 +23,7 @@ export function Hero() {
     }, [])
 
     return (
-        <section className="relative h-screen min-h-[800px] w-full flex items-center justify-center overflow-hidden">
+        <section id="home" className="relative h-screen min-h-[800px] w-full flex items-center justify-center overflow-hidden">
             {/* Background Image Slider */}
             <div className="absolute inset-0 z-0">
                 <AnimatePresence mode="popLayout">
