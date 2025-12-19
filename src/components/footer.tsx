@@ -24,9 +24,9 @@ export function Footer() {
                     ))}
                 </div>
 
-                <p className="text-xs text-muted-foreground">
+                {/* <p className="text-xs text-muted-foreground">
                     Built with <span className="font-semibold text-foreground">Next.js 15</span> ⚡
-                </p>
+                </p> */}
             </div>
         </footer>
     )
