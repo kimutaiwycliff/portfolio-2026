@@ -59,14 +59,15 @@ export const projects: Project[] = [
         date: "2021"
     },
     {
-        id: "geoserver-cluster",
-        title: "GeoServer Cluster Deployment",
-        description: "High-performance spatial data infrastructure deployment handling significant concurrent request loads.",
-        category: "DevOps",
-        technologies: ["Docker", "Kubernetes", "GeoServer", "Nginx"],
-        imageUrl: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2051&auto=format&fit=crop", // Servers
-        githubUrl: "https://github.com/wycliffkimutai",
+        id: "geojson-studio",
+        title: "GeoJSON Studio",
+        description: "Browser-based GeoJSON editor and map visualizer with multi-layer support, geometry operations (buffer, simplify, dissolve), and shareable URL links — zero backend, zero API keys.",
+        category: "GIS",
+        technologies: ["SvelteKit", "MapLibre GL JS", "Turf.js", "LZ-String", "Bun"],
+        imageUrl: "https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074&auto=format&fit=crop", // Map/GIS
+        liveUrl: "https://geojson-studio-delta.vercel.app",
+        githubUrl: "https://github.com/kimutaiwycliff/Geojson-Studio",
         featured: true,
-        date: "2023"
-    }
+        date: "2026"
+    },
 ];
