@@ -59,6 +59,17 @@ export const projects: Project[] = [
         date: "2021"
     },
     {
+        id: "urban-heat-island-explorer",
+        title: "Urban Heat Island Explorer",
+        description: "Live climate dashboard fetching weather data across 4 geographic zones per city in parallel, computing Urban Heat Island temperature deltas with interactive time-series charts and an hourly heat grid.",
+        category: "Web",
+        technologies: ["React", "MapLibre GL", "Recharts", "Zustand", "TanStack Query", "Tailwind CSS", "shadcn/ui", "Vite"],
+        imageUrl: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2144&auto=format&fit=crop", // City skyline
+        githubUrl: "https://github.com/kimutaiwycliff/urban-heat-island-explorer",
+        featured: true,
+        date: "2026"
+    },
+    {
         id: "geojson-studio",
         title: "GeoJSON Studio",
         description: "Browser-based GeoJSON editor and map visualizer with multi-layer support, geometry operations (buffer, simplify, dissolve), and shareable URL links — zero backend, zero API keys.",
