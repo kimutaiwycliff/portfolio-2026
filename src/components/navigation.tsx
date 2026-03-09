@@ -2,114 +2,145 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Menu } from "lucide-react"
-import { usePathname } from "next/navigation"
-
+import { Menu, X } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 import { useActiveSection } from "@/hooks/use-active-section"
 import { cn } from "@/lib/utils"
 import { ModeToggle } from "@/components/mode-toggle"
-import { Button } from "@/components/ui/button"
-import {
-    Sheet,
-    SheetContent,
-    SheetTrigger,
-    SheetClose,
-    SheetTitle
-} from "@/components/ui/sheet"
 
 const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/#about" },
-    { name: "Skills", href: "/#skills" },
-    { name: "Experience", href: "/#experience" },
-    { name: "Projects", href: "/#projects" },
-    { name: "Contact", href: "/#contact" },
+    { name: "About", href: "/#about", section: "about" },
+    { name: "Skills", href: "/#skills", section: "skills" },
+    { name: "Work", href: "/#experience", section: "experience" },
+    { name: "Projects", href: "/#projects", section: "projects" },
+    { name: "Contact", href: "/#contact", section: "contact" },
 ]
 
 export function Navigation() {
-    const [isScrolled, setIsScrolled] = React.useState(false)
-    const pathname = usePathname()
+    const [isOpen, setIsOpen] = React.useState(false)
+    const [mounted, setMounted] = React.useState(false)
     const activeSection = useActiveSection([
         "home",
         "about",
         "skills",
         "experience",
         "projects",
-        "contact"
+        "contact",
     ])
 
     React.useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20)
-        }
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
+        setMounted(true)
     }, [])
 
+    if (!mounted) return null
+
     return (
-        <header
-            className={cn(
-                "fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent",
-                isScrolled
-                    ? "bg-background/80 backdrop-blur-md border-border py-3 shadow-sm"
-                    : "bg-transparent py-5"
-            )}
-        >
-            <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-                <Link
-                    href="/"
-                    className="text-xl font-bold tracking-tighter text-foreground hover:opacity-80 transition-opacity flex items-center gap-2"
-                >
-                    <span className="bg-primary text-primary-foreground rounded-md px-2 py-1">WK</span>
-                    <span className="hidden sm:inline-block">Wycliff Kimutai</span>
-                </Link>
+        <>
+            {/* ── Desktop: floating pill nav ── */}
+            <motion.header
+                initial={{ y: -80, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: "backOut" }}
+                className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+            >
+                {/* Desktop pill */}
+                <div className="hidden md:flex pointer-events-auto items-center gap-1 px-2 py-2 rounded-full bg-background/75 backdrop-blur-2xl border border-border shadow-xl shadow-black/10">
+                    {/* Logo */}
+                    <Link
+                        href="/"
+                        className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-xs font-bold font-mono mr-2 hover:opacity-80 transition-opacity"
+                    >
+                        WK
+                    </Link>
 
-                {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-6">
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className={cn(
-                                "text-sm font-medium transition-colors hover:text-primary relative group",
-                                (item.href === "/" && activeSection === "home") || item.href === `/#${activeSection}` ? "text-primary" : "text-muted-foreground"
-                            )}
-                        >
-                            {item.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-                        </Link>
-                    ))}
-                    <ModeToggle />
-                </nav>
+                    {navItems.map((item) => {
+                        const isActive = activeSection === item.section
+                        return (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className={cn(
+                                    "relative px-4 py-1.5 text-sm font-medium rounded-full transition-colors duration-200 z-10",
+                                    isActive
+                                        ? "text-primary-foreground"
+                                        : "text-muted-foreground hover:text-foreground"
+                                )}
+                            >
+                                {isActive && (
+                                    <motion.span
+                                        layoutId="nav-pill"
+                                        className="absolute inset-0 rounded-full bg-primary"
+                                        style={{ zIndex: -1 }}
+                                        transition={{ type: "spring", duration: 0.45, bounce: 0.2 }}
+                                    />
+                                )}
+                                {item.name}
+                            </Link>
+                        )
+                    })}
 
-                {/* Mobile Nav */}
-                <div className="md:hidden flex items-center gap-4">
-                    <ModeToggle />
-                    <Sheet>
-                        <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                                <Menu className="h-6 w-6" />
-                                <span className="sr-only">Open menu</span>
-                            </Button>
-                        </SheetTrigger>
-                        <SheetContent side="right">
-                            <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                            <div className="flex flex-col gap-6 mt-10">
-                                {navItems.map((item) => (
-                                    <SheetClose key={item.href} asChild>
-                                        <Link
-                                            href={item.href}
-                                            className="text-lg font-medium hover:text-primary transition-colors"
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    </SheetClose>
-                                ))}
-                            </div>
-                        </SheetContent>
-                    </Sheet>
+                    <div className="ml-2 pl-2 border-l border-border">
+                        <ModeToggle />
+                    </div>
                 </div>
-            </div>
-        </header>
+
+                {/* Mobile top bar */}
+                <div className="md:hidden pointer-events-auto flex w-full items-center justify-between px-4 py-2.5 rounded-2xl bg-background/80 backdrop-blur-2xl border border-border shadow-lg">
+                    <Link href="/" className="flex items-center gap-2">
+                        <span className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-bold font-mono">
+                            WK
+                        </span>
+                        <span className="font-bold text-sm font-display">Wycliff Kimutai</span>
+                    </Link>
+                    <div className="flex items-center gap-1.5">
+                        <ModeToggle />
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                            aria-label="Toggle menu"
+                        >
+                            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                        </button>
+                    </div>
+                </div>
+            </motion.header>
+
+            {/* ── Mobile menu ── */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -12, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -12, scale: 0.97 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="fixed top-[72px] left-4 right-4 z-40 md:hidden rounded-2xl bg-card/95 backdrop-blur-2xl border border-border shadow-2xl p-5"
+                    >
+                        <nav className="flex flex-col">
+                            {navItems.map((item, i) => (
+                                <motion.div
+                                    key={item.href}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.05 }}
+                                >
+                                    <Link
+                                        href={item.href}
+                                        onClick={() => setIsOpen(false)}
+                                        className={cn(
+                                            "block py-3 text-base font-medium border-b border-border last:border-0 transition-colors",
+                                            activeSection === item.section
+                                                ? "text-primary"
+                                                : "text-muted-foreground hover:text-foreground"
+                                        )}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </motion.div>
+                            ))}
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     )
 }

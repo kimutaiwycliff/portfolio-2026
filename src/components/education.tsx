@@ -1,29 +1,34 @@
 "use client"
 
 import { SectionWrapper } from "@/components/section-wrapper"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { GraduationCap, Award } from "lucide-react"
+import { motion } from "framer-motion"
+import { Award } from "lucide-react"
 
 const education = [
     {
         institution: "KCA University",
         degree: "MSc Data Analytics",
-        period: "2022 - 2025",
-        description: "Focus on statistical modeling, big data analytics, and machine learning."
+        period: "2022 – 2025",
+        description:
+            "Focus on statistical modeling, big data analytics, and machine learning.",
+        accent: "from-primary to-secondary",
     },
     {
         institution: "JKUAT",
         degree: "BSc Geomatics Engineering",
-        period: "2015 - 2021",
-        description: "First Class Honours. Specialization in GIS, Geodesy, and Land Information Systems."
+        period: "2015 – 2021",
+        description:
+            "First Class Honours. Specialization in GIS, Geodesy, and Land Information Systems.",
+        accent: "from-secondary to-primary",
     },
     {
         institution: "Cisco Networking Academy",
         degree: "CCNA Routing & Switching",
-        period: "2017 - 2018",
-        description: "Network infrastructure, routing protocols, and WAN technologies."
-    }
+        period: "2017 – 2018",
+        description:
+            "Network infrastructure, routing protocols, and WAN technologies.",
+        accent: "from-primary/60 to-secondary/60",
+    },
 ]
 
 const certifications = [
@@ -32,61 +37,97 @@ const certifications = [
     "Python for Data Science",
     "Digital Cartography",
     "AWS Cloud Practitioner",
-    "Deep Learning Specialization"
+    "Deep Learning Specialization",
 ]
 
 export function Education() {
     return (
         <SectionWrapper id="education">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                {/* Education Column */}
-                <div className="space-y-8">
-                    <div className="flex items-center gap-3 mb-6">
-                        <GraduationCap className="w-8 h-8 text-primary" />
-                        <h2 className="text-3xl font-bold">Education</h2>
-                    </div>
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
+                {/* Education — 3 cols */}
+                <div className="lg:col-span-3 space-y-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <p className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase mb-4 flex items-center gap-3">
+                            <span className="h-px w-8 bg-primary" />
+                            Education
+                        </p>
+                        <h2 className="text-3xl md:text-4xl font-extrabold leading-tight font-display">
+                            Academic
+                            <br />
+                            <span className="text-primary">Foundation</span>
+                        </h2>
+                    </motion.div>
 
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                         {education.map((edu, index) => (
-                            <Card key={index} className="border-l-4 border-l-primary hover:shadow-md transition-all">
-                                <CardHeader className="pb-2">
-                                    <CardTitle className="text-lg font-bold flex justify-between items-start">
-                                        <span>{edu.degree}</span>
-                                        <Badge variant="secondary" className="text-xs font-normal whitespace-nowrap ml-2">
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="flex gap-4 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all duration-300 group"
+                            >
+                                {/* Accent bar */}
+                                <div
+                                    className={`w-1 rounded-full bg-gradient-to-b ${edu.accent} flex-shrink-0 group-hover:w-1.5 transition-all duration-300`}
+                                />
+                                <div className="space-y-1 min-w-0">
+                                    <div className="flex items-start justify-between flex-wrap gap-2">
+                                        <span className="font-bold font-display">{edu.degree}</span>
+                                        <span className="text-[11px] font-mono text-muted-foreground bg-muted px-2.5 py-0.5 rounded-full flex-shrink-0">
                                             {edu.period}
-                                        </Badge>
-                                    </CardTitle>
-                                    <p className="text-primary font-medium">{edu.institution}</p>
-                                </CardHeader>
-                                <CardContent>
+                                        </span>
+                                    </div>
+                                    <p className="text-primary text-sm font-semibold">
+                                        {edu.institution}
+                                    </p>
                                     <p className="text-sm text-muted-foreground">{edu.description}</p>
-                                </CardContent>
-                            </Card>
+                                </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
 
-                {/* Certifications Column */}
-                <div className="space-y-8">
-                    <div className="flex items-center gap-3 mb-6">
-                        <Award className="w-8 h-8 text-primary" />
-                        <h2 className="text-3xl font-bold">Certifications</h2>
+                {/* Certifications — 2 cols */}
+                <div className="lg:col-span-2 space-y-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.15 }}
+                    >
+                        <p className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase mb-4 flex items-center gap-3">
+                            <span className="h-px w-8 bg-primary" />
+                            Certifications
+                        </p>
+                        <h2 className="text-3xl md:text-4xl font-extrabold leading-tight font-display">
+                            Always
+                            <br />
+                            <span className="text-primary">Learning</span>
+                        </h2>
+                    </motion.div>
+
+                    <div className="space-y-2.5">
+                        {certifications.map((cert, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: index * 0.07 }}
+                                className="flex items-center gap-3 p-4 rounded-xl bg-card border border-border hover:border-primary/30 hover:bg-primary/5 transition-all duration-200 cursor-default"
+                            >
+                                <Award className="w-4 h-4 text-primary flex-shrink-0" />
+                                <span className="text-sm font-medium">{cert}</span>
+                            </motion.div>
+                        ))}
                     </div>
-
-                    <Card>
-                        <CardContent className="p-6">
-                            <div className="flex flex-wrap gap-3">
-                                {certifications.map((cert, index) => (
-                                    <div key={index} className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 border hover:bg-muted transition-colors w-full sm:w-auto">
-                                        <Award className="w-5 h-5 text-accent" />
-                                        <span className="font-medium">{cert}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    {/* Optional: Add specific certification logos or more details here later */}
                 </div>
             </div>
         </SectionWrapper>

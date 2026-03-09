@@ -1,70 +1,106 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { SpotlightCard } from "@/components/ui/spotlight-card"
 import { Project } from "@/data/projects"
-import { Github, Globe } from "lucide-react"
+import { Github, Globe, ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 interface ProjectCardProps {
     project: Project
+    featured?: boolean
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, featured = false }: ProjectCardProps) {
     return (
-        <Card className="flex flex-col h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="relative w-full aspect-[4/3] overflow-hidden">
+        <SpotlightCard
+            className={`group flex flex-col h-full rounded-2xl bg-card border border-border overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 ${
+                featured ? "md:flex-row" : ""
+            }`}
+            spotlightColor="rgba(0, 200, 240, 0.09)"
+        >
+            {/* Image */}
+            <div
+                className={`relative flex-shrink-0 overflow-hidden ${
+                    featured
+                        ? "md:w-[45%] aspect-[4/3] md:aspect-auto"
+                        : "aspect-[16/9]"
+                }`}
+            >
                 <Image
                     src={project.imageUrl}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-500 hover:scale-110"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute top-2 right-2 flex gap-2">
-                    <Badge className="bg-background/80 hover:bg-background text-foreground backdrop-blur-sm shadow-sm">
-                        {project.category}
-                    </Badge>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
+
+                {/* Badges */}
+                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-mono bg-background/75 backdrop-blur-sm border border-border/60 text-muted-foreground">
+                    {project.category}
+                </span>
+                <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-mono bg-primary/15 backdrop-blur-sm border border-primary/25 text-primary">
+                    {project.date}
+                </span>
             </div>
 
-            <CardHeader>
-                <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-bold line-clamp-1">{project.title}</h3>
+            {/* Content */}
+            <div className={`flex flex-col flex-1 ${featured ? "p-7 md:p-8" : "p-6"}`}>
+                <div className="flex-1 space-y-3 mb-5">
+                    <h3
+                        className={`font-bold font-display leading-snug ${
+                            featured ? "text-2xl md:text-3xl" : "text-xl"
+                        }`}
+                    >
+                        {project.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                        {project.description}
+                    </p>
                 </div>
-                <p className="text-muted-foreground text-sm line-clamp-3">{project.description}</p>
-            </CardHeader>
 
-            <CardContent className="flex-grow">
-                <div className="flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 4).map((tech) => (
-                        <Badge key={tech} variant="secondary" className="text-xs">
+                <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.slice(0, featured ? 6 : 4).map((tech) => (
+                        <span
+                            key={tech}
+                            className="px-2.5 py-1 rounded-full text-[11px] font-mono bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors duration-200"
+                        >
                             {tech}
-                        </Badge>
+                        </span>
                     ))}
-                    {project.technologies.length > 4 && (
-                        <Badge variant="secondary" className="text-xs">+{project.technologies.length - 4}</Badge>
+                    {project.technologies.length > (featured ? 6 : 4) && (
+                        <span className="px-2.5 py-1 rounded-full text-[11px] font-mono bg-muted text-muted-foreground">
+                            +{project.technologies.length - (featured ? 6 : 4)}
+                        </span>
                     )}
                 </div>
-            </CardContent>
 
-            <CardFooter className="gap-2 pt-0">
-                {project.githubUrl && (
-                    <Button variant="outline" size="sm" className="flex-1" asChild>
-                        <Link href={project.githubUrl} target="_blank">
-                            <Github className="w-4 h-4 mr-2" /> Code
+                <div className="flex items-center gap-1 pt-3 border-t border-border">
+                    {project.githubUrl && (
+                        <Link
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors px-3 py-1.5 rounded-lg hover:bg-muted"
+                        >
+                            <Github className="w-4 h-4" />
+                            Code
                         </Link>
-                    </Button>
-                )}
-                {project.liveUrl && (
-                    <Button size="sm" className="flex-1" asChild>
-                        <Link href={project.liveUrl} target="_blank">
-                            <Globe className="w-4 h-4 mr-2" /> Demo
+                    )}
+                    {project.liveUrl && (
+                        <Link
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group/link flex items-center gap-1.5 text-sm text-primary hover:text-primary/80 transition-colors px-3 py-1.5 rounded-lg hover:bg-primary/10 ml-auto"
+                        >
+                            <Globe className="w-4 h-4" />
+                            Live Demo
+                            <ArrowUpRight className="w-3 h-3 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                         </Link>
-                    </Button>
-                )}
-            </CardFooter>
-        </Card>
+                    )}
+                </div>
+            </div>
+        </SpotlightCard>
     )
 }
