@@ -27,38 +27,6 @@ export const projects: Project[] = [
         date: "2023"
     },
     {
-        id: "water-forecasting-ann",
-        title: "Water Demand Forecasting ANN",
-        description: "Machine learning framework predicting urban water demand using Artificial Neural Networks and climatic data.",
-        category: "ML",
-        technologies: ["Python", "TensorFlow", "Pandas", "Matplotlib"],
-        imageUrl: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=2074&auto=format&fit=crop", // Data/AI
-        githubUrl: "https://github.com/wycliffkimutai",
-        featured: true,
-        date: "2024"
-    },
-    {
-        id: "renewable-dashboard",
-        title: "Renewable Energy Dashboard",
-        description: "Interactive Next.js dashboard for analyzing solar and wind potential across varying terrains.",
-        category: "Web",
-        technologies: ["Next.js", "Leaflet", "D3.js", "Tailwind CSS"],
-        imageUrl: "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop", // Solar/Energy
-        liveUrl: "https://demo.com",
-        featured: false,
-        date: "2022"
-    },
-    {
-        id: "vrs-research",
-        title: "VRS Kenya Research",
-        description: "Research on GPS positioning accuracy using Virtual Reference Stations in dynamic environments.",
-        category: "Surveying",
-        technologies: ["GPS RTK", "Python", "Statistical Analysis"],
-        imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", // Data Visualization/Charts
-        featured: false,
-        date: "2021"
-    },
-    {
         id: "urban-heat-island-explorer",
         title: "Urban Heat Island Explorer",
         description: "Live climate dashboard fetching weather data across 4 geographic zones per city in parallel, computing Urban Heat Island temperature deltas with interactive time-series charts and an hourly heat grid.",
