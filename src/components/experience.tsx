@@ -20,7 +20,7 @@ export function Experience() {
                         <span className="h-px w-8 bg-primary" />
                         Experience
                     </p>
-                    <h2 className="text-3xl md:text-5xl font-extrabold leading-tight font-display">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight font-display">
                         Where I&apos;ve Built
                         <br />
                         <span className="text-primary">Real Solutions</span>
@@ -45,13 +45,13 @@ export function Experience() {
                                 {/* Timeline dot */}
                                 <div className="absolute -left-5 md:-left-8 top-7 w-2 h-2 rounded-full bg-primary -translate-x-[3px] group-hover:scale-150 transition-transform duration-200" />
 
-                                <div className="rounded-2xl bg-card border border-border hover:border-primary/30 p-6 md:p-8 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                                <div className="rounded-2xl bg-card border border-border hover:border-primary/30 p-4 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
                                     <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                                         <div>
                                             <span className="text-[11px] font-mono text-primary/60 mb-1 block tracking-wide">
                                                 {job.period}
                                             </span>
-                                            <h3 className="text-xl font-bold font-display leading-snug">
+                                            <h3 className="text-lg sm:text-xl font-bold font-display leading-snug">
                                                 {job.title}
                                             </h3>
                                             <p className="text-primary font-semibold mt-0.5">

@@ -45,11 +45,11 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
             </div>
 
             {/* Content */}
-            <div className={`flex flex-col flex-1 ${featured ? "p-7 md:p-8" : "p-6"}`}>
+            <div className={`flex flex-col flex-1 ${featured ? "p-4 sm:p-6 md:p-8" : "p-4 sm:p-6"}`}>
                 <div className="flex-1 space-y-3 mb-5">
                     <h3
                         className={`font-bold font-display leading-snug ${
-                            featured ? "text-2xl md:text-3xl" : "text-xl"
+                            featured ? "text-xl sm:text-2xl md:text-3xl" : "text-lg sm:text-xl"
                         }`}
                     >
                         {project.title}

@@ -24,7 +24,7 @@ function StatBlock({ label, value, delay }: { label: string; value: string; dela
             transition={{ duration: 0.5, delay }}
             className="flex flex-col"
         >
-            <span className="text-4xl md:text-5xl font-extrabold text-primary font-display leading-none">
+            <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary font-display leading-none">
                 {value}
             </span>
             <span className="text-sm text-muted-foreground mt-1.5 leading-snug">{label}</span>
@@ -45,7 +45,7 @@ export function About() {
                     className="relative"
                 >
                     {/* Big decorative section number */}
-                    <span className="absolute -top-6 -left-2 text-[9rem] md:text-[11rem] font-extrabold text-border/40 leading-none select-none font-display pointer-events-none">
+                    <span className="absolute -top-6 -left-2 text-[5rem] sm:text-[7rem] md:text-[11rem] font-extrabold text-border/40 leading-none select-none font-display pointer-events-none">
                         01
                     </span>
 
@@ -64,7 +64,7 @@ export function About() {
                     <motion.div
                         animate={{ y: [0, -8, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute bottom-8 -right-4 md:-right-8 flex flex-col gap-2"
+                        className="hidden sm:flex absolute bottom-8 -right-4 md:-right-8 flex-col gap-2"
                     >
                         {["ArcGIS Pro", "React / Next.js", "Python"].map((skill) => (
                             <span
@@ -89,7 +89,7 @@ export function About() {
                             <span className="h-px w-8 bg-primary" />
                             About Me
                         </p>
-                        <h2 className="text-3xl md:text-5xl font-extrabold leading-tight mb-6 font-display">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight mb-6 font-display">
                             Where Maps Meet
                             <br />
                             <span className="text-primary">Modern Software</span>
@@ -116,7 +116,7 @@ export function About() {
                     </motion.div>
 
                     {/* Stats */}
-                    <div className="grid grid-cols-2 gap-8 pt-6 border-t border-border">
+                    <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 pt-6 border-t border-border">
                         {stats.map((stat, i) => (
                             <StatBlock key={stat.label} {...stat} delay={i * 0.1} />
                         ))}

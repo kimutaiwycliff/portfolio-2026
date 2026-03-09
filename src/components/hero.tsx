@@ -103,7 +103,7 @@ export function Hero() {
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.1, duration: 0.5 }}
-                className="absolute top-20 right-4 md:top-24 md:right-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-primary/25 bg-primary/5 backdrop-blur-sm"
+                className="hidden sm:flex absolute top-20 right-4 md:top-24 md:right-10 items-center gap-1.5 px-3 py-1.5 rounded-full border border-primary/25 bg-primary/5 backdrop-blur-sm"
             >
                 <MapPin className="w-3 h-3 text-primary" />
                 <span className="text-[10px] font-mono text-primary/75 tracking-wide">
@@ -114,9 +114,9 @@ export function Hero() {
             {/* ── Main content ── */}
             <motion.div
                 style={{ y, opacity }}
-                className="relative z-10 container mx-auto px-4 md:px-6 max-w-6xl pt-24"
+                className="relative z-10 container mx-auto px-4 md:px-6 max-w-6xl pt-20 sm:pt-24"
             >
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 lg:gap-20 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8 lg:gap-20 items-center">
                     {/* Left: text */}
                     <motion.div
                         variants={container}
@@ -211,7 +211,7 @@ export function Hero() {
                         transition={{ duration: 0.8, delay: 0.5, ease: "backOut" }}
                         className="relative flex justify-center lg:justify-end"
                     >
-                        <div className="relative w-64 h-64 md:w-72 md:h-72">
+                        <div className="relative w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72">
                             {/* Glow halo */}
                             <div className="absolute inset-0 rounded-full bg-primary/15 blur-3xl scale-125" />
                             {/* Outer ring (slow pulse) */}
@@ -235,25 +235,25 @@ export function Hero() {
                                 />
                             </div>
 
-                            {/* Floating tech badges */}
+                            {/* Floating tech badges — hidden on xs to prevent overflow */}
                             <motion.span
                                 animate={{ y: [0, -8, 0] }}
                                 transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute -top-2 -right-6 px-3 py-1.5 rounded-full bg-card border border-border text-xs font-mono text-muted-foreground shadow-lg backdrop-blur"
+                                className="hidden sm:block absolute -top-2 -right-6 px-3 py-1.5 rounded-full bg-card border border-border text-xs font-mono text-muted-foreground shadow-lg backdrop-blur"
                             >
                                 🌍 GIS
                             </motion.span>
                             <motion.span
                                 animate={{ y: [0, 8, 0] }}
                                 transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute -bottom-1 -left-8 px-3 py-1.5 rounded-full bg-card border border-border text-xs font-mono text-muted-foreground shadow-lg backdrop-blur"
+                                className="hidden sm:block absolute -bottom-1 -left-8 px-3 py-1.5 rounded-full bg-card border border-border text-xs font-mono text-muted-foreground shadow-lg backdrop-blur"
                             >
                                 ⚡ Next.js
                             </motion.span>
                             <motion.span
                                 animate={{ y: [0, -5, 0] }}
                                 transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute top-1/2 -right-16 px-3 py-1.5 rounded-full bg-card border border-border text-xs font-mono text-muted-foreground shadow-lg backdrop-blur"
+                                className="hidden md:block absolute top-1/2 -right-16 px-3 py-1.5 rounded-full bg-card border border-border text-xs font-mono text-muted-foreground shadow-lg backdrop-blur"
                             >
                                 🛰 Supabase
                             </motion.span>

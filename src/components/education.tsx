@@ -43,7 +43,7 @@ const certifications = [
 export function Education() {
     return (
         <SectionWrapper id="education">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-20">
                 {/* Education — 3 cols */}
                 <div className="lg:col-span-3 space-y-8">
                     <motion.div
@@ -56,7 +56,7 @@ export function Education() {
                             <span className="h-px w-8 bg-primary" />
                             Education
                         </p>
-                        <h2 className="text-3xl md:text-4xl font-extrabold leading-tight font-display">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight font-display">
                             Academic
                             <br />
                             <span className="text-primary">Foundation</span>
@@ -71,7 +71,7 @@ export function Education() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="flex gap-4 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all duration-300 group"
+                                className="flex gap-3 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all duration-300 group"
                             >
                                 {/* Accent bar */}
                                 <div
@@ -106,7 +106,7 @@ export function Education() {
                             <span className="h-px w-8 bg-primary" />
                             Certifications
                         </p>
-                        <h2 className="text-3xl md:text-4xl font-extrabold leading-tight font-display">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight font-display">
                             Always
                             <br />
                             <span className="text-primary">Learning</span>

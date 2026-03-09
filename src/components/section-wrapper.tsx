@@ -18,7 +18,7 @@ export function SectionWrapper({
     delay = 0,
 }: SectionWrapperProps) {
     return (
-        <section id={id} className={cn("py-20 md:py-32 w-full", className)}>
+        <section id={id} className={cn("py-14 sm:py-20 md:py-28 lg:py-32 w-full", className)}>
             <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}

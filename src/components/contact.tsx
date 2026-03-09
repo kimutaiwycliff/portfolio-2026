@@ -42,12 +42,12 @@ export function Contact() {
                         Contact
                         <span className="h-px w-8 bg-primary" />
                     </p>
-                    <h2 className="text-3xl md:text-6xl font-extrabold leading-tight mb-5 font-display">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-5 font-display">
                         Let&apos;s Build
                         <br />
                         <span className="text-primary">Something Great</span>
                     </h2>
-                    <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-6">
+                    <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto mb-6">
                         Open to geospatial engineering, full-stack development, and
                         interesting collaborations.
                     </p>
@@ -55,14 +55,14 @@ export function Contact() {
                     {/* Big email CTA */}
                     <a
                         href={`mailto:${contactDetails.email}`}
-                        className="group inline-flex items-center gap-2 text-xl md:text-2xl font-bold text-primary hover:text-primary/80 transition-colors"
+                        className="group inline-flex items-center gap-2 text-base sm:text-xl md:text-2xl font-bold text-primary hover:text-primary/80 transition-colors break-all sm:break-normal"
                     >
                         {contactDetails.email}
                         <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </a>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
                     {/* Contact info */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
@@ -150,10 +150,10 @@ export function Contact() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="rounded-2xl bg-card border border-border p-7 md:p-8"
+                        className="rounded-2xl bg-card border border-border p-4 sm:p-6 md:p-8"
                     >
                         <form action={formAction} className="space-y-5">
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
                                     <Label
                                         htmlFor="name"

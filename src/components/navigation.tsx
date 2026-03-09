@@ -90,7 +90,7 @@ export function Navigation() {
                         <span className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-bold font-mono">
                             WK
                         </span>
-                        <span className="font-bold text-sm font-display">Wycliff Kimutai</span>
+                        <span className="font-bold text-xs xs:text-sm font-display">Wycliff Kimutai</span>
                     </Link>
                     <div className="flex items-center gap-1.5">
                         <ModeToggle />

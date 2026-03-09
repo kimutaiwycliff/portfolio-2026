@@ -29,7 +29,7 @@ export function Skills() {
                         <span className="h-px w-8 bg-primary" />
                         Technical Skills
                     </p>
-                    <h2 className="text-3xl md:text-5xl font-extrabold leading-tight font-display">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight font-display">
                         A Toolkit Built for
                         <br />
                         <span className="text-primary">Complex Problems</span>
@@ -55,7 +55,7 @@ export function Skills() {
                                     className="h-full rounded-2xl bg-card border border-border hover:border-primary/30 transition-colors duration-300"
                                     spotlightColor={meta.color}
                                 >
-                                    <div className="p-6 h-full flex flex-col">
+                                    <div className="p-4 sm:p-6 h-full flex flex-col">
                                         <div className="flex items-center gap-3 mb-4">
                                             <span className="text-2xl">{meta.icon}</span>
                                             <h3 className="font-bold text-base font-display">
