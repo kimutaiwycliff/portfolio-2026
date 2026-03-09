@@ -66,6 +66,7 @@ export const projects: Project[] = [
         technologies: ["React", "MapLibre GL", "Recharts", "Zustand", "TanStack Query", "Tailwind CSS", "shadcn/ui", "Vite"],
         imageUrl: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2144&auto=format&fit=crop", // City skyline
         githubUrl: "https://github.com/kimutaiwycliff/urban-heat-island-explorer",
+        liveUrl: "https://urban-heat-island-explorer.vercel.app",
         featured: true,
         date: "2026"
     },
