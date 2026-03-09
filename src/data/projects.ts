@@ -50,4 +50,27 @@ export const projects: Project[] = [
         featured: true,
         date: "2026"
     },
+    {
+        id: "luxe-pos-web",
+        title: "Luxe Collections POS — Web",
+        description: "Full-featured Point of Sale and inventory management system for a Kenyan fashion & lifestyle brand. Includes a POS checkout interface, analytics dashboard, multi-location stock tracking, category management, and an e-commerce landing page — all backed by Supabase with row-level security.",
+        category: "Web",
+        technologies: ["Next.js", "Supabase", "TypeScript", "Tailwind CSS", "Radix UI", "PostgreSQL"],
+        imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop", // Retail/checkout
+        githubUrl: "https://github.com/kimutaiwycliff/luxe_supabase_pos",
+        liveUrl: "https://luxe-pos.vercel.app/",
+        featured: true,
+        date: "2026"
+    },
+    {
+        id: "luxe-pos-mobile",
+        title: "Luxe Collections POS — Mobile",
+        description: "Cross-platform iOS & Android POS and inventory app for the same Luxe Collections platform. Features barcode scanning, Algolia-powered search, layaway orders with partial payments, loyalty points, multi-location stock management, Victory Native charts, and full dark mode — with offline-first MMKV storage.",
+        category: "Web",
+        technologies: ["Expo", "React Native", "TypeScript", "Supabase", "Algolia", "Zustand", "TanStack Query", "React Native Paper", "MMKV", "Bun"],
+        imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop", // Mobile device
+        githubUrl: "https://github.com/kimutaiwycliff/mobile-pos",
+        featured: false,
+        date: "2026"
+    },
 ];
