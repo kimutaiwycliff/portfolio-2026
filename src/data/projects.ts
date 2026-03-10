@@ -70,6 +70,7 @@ export const projects: Project[] = [
         technologies: ["React", "MapLibre GL", "OpenRouteService", "Zustand", "TanStack Query", "Recharts", "Tailwind CSS", "Vite"],
         imageUrl: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?q=80&w=2134&auto=format&fit=crop", // Road map / routing
         githubUrl: "https://github.com/kimutaiwycliff/isochrone-map",
+        liveUrl: "https://routing-ors-chi.vercel.app/",
         featured: true,
         date: "2026"
     },
