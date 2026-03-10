@@ -63,6 +63,17 @@ export const projects: Project[] = [
         date: "2026"
     },
     {
+        id: "route-explorer",
+        title: "Route Explorer",
+        description: "Full-featured ORS-powered mapping app: multi-waypoint directions with 9 travel profiles, avoid-feature toggles, up to 3 alternative routes, isochrone reachability maps, travel-time matrix, POI discovery, multi-stop route optimisation (VRP/TSP), elevation profiles, and GPX/GeoJSON export.",
+        category: "GIS",
+        technologies: ["React", "MapLibre GL", "OpenRouteService", "Zustand", "TanStack Query", "Recharts", "Tailwind CSS", "Vite"],
+        imageUrl: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?q=80&w=2134&auto=format&fit=crop", // Road map / routing
+        githubUrl: "https://github.com/kimutaiwycliff/isochrone-map",
+        featured: true,
+        date: "2026"
+    },
+    {
         id: "luxe-pos-mobile",
         title: "Luxe Collections POS — Mobile",
         description: "Cross-platform iOS & Android POS and inventory app for the same Luxe Collections platform. Features barcode scanning, Algolia-powered search, layaway orders with partial payments, loyalty points, multi-location stock management, Victory Native charts, and full dark mode — with offline-first MMKV storage.",
