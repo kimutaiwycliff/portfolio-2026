@@ -82,6 +82,7 @@ export const projects: Project[] = [
         technologies: ["SvelteKit", "Svelte 5", "Supabase", "Anthropic Claude", "TypeScript", "Tailwind CSS", "shadcn-svelte", "PostgreSQL"],
         imageUrl: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop",
         githubUrl: "https://github.com/kimutaiwycliff/job-hunter",
+        liveUrl: "https://job-hunter-nu.vercel.app/",
         featured: true,
         date: "2026"
     },
