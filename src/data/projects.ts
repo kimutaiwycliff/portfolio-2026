@@ -75,6 +75,17 @@ export const projects: Project[] = [
         date: "2026"
     },
     {
+        id: "job-hunter-ai",
+        title: "JobHunter AI",
+        description: "AI-powered job tracking and search platform. Parses your CV, uses Claude with web search to find matching open roles, and manages your full application pipeline — Active, Rejected, Accepted, Withdrawn — with a kanban and table view.",
+        category: "Web",
+        technologies: ["SvelteKit", "Svelte 5", "Supabase", "Anthropic Claude", "TypeScript", "Tailwind CSS", "shadcn-svelte", "PostgreSQL"],
+        imageUrl: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop",
+        githubUrl: "https://github.com/kimutaiwycliff/job-hunter",
+        featured: true,
+        date: "2026"
+    },
+    {
         id: "luxe-pos-mobile",
         title: "Luxe Collections POS — Mobile",
         description: "Cross-platform iOS & Android POS and inventory app for the same Luxe Collections platform. Features barcode scanning, Algolia-powered search, layaway orders with partial payments, loyalty points, multi-location stock management, Victory Native charts, and full dark mode — with offline-first MMKV storage.",
