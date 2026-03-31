@@ -39,6 +39,19 @@ export const projects: Project[] = [
         date: "2026"
     },
     {
+        id: "dadaab-climate-risk-dashboard",
+        title: "Dadaab Climate Risk Dashboard",
+        description: "Production-grade GIS web app for real-time climate hazard monitoring in the Dadaab refugee complex, Kenya. Integrates 5 live APIs — NASA FIRMS fire detections, USGS seismic data, Open-Meteo weather, UNHCR refugee population, and OpenStreetMap Overpass — with interactive MapLibre layers, QGIS-style attribute tables, and drag-to-reorder layer management.",
+        longDescription: "Built for disaster risk reduction (DRR) decision-making in one of the world's largest refugee settlements. Features include: NASA FIRMS VIIRS fire hotspot mapping, USGS earthquake monitoring, UNHCR refugee population trends, OSM health facilities and water points from Overpass API, drought zone (IPC/FEWS NET) and flood-prone area overlays, composite risk grid, dark/light themes with auto-synced basemaps (Dark Matter, OSM, Voyager, Satellite), QGIS-style attribute table with sort/search/zoom-to-feature, and layer drag-to-reorder.",
+        category: "GIS",
+        technologies: ["SvelteKit", "Svelte 5", "MapLibre GL JS", "TypeScript", "Tailwind CSS v4", "NASA FIRMS", "USGS API", "UNHCR API", "Overpass API", "Open-Meteo"],
+        imageUrl: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop", // Humanitarian/Africa aerial
+        githubUrl: "https://github.com/kimutaiwycliff/dadaab-climate-risk-dashboard",
+        liveUrl: "https://dadaab-climate-risk-dashboard.vercel.app/",
+        featured: true,
+        date: "2026"
+    },
+    {
         id: "geojson-studio",
         title: "GeoJSON Studio",
         description: "Browser-based GeoJSON editor and map visualizer with multi-layer support, geometry operations (buffer, simplify, dissolve), and shareable URL links — zero backend, zero API keys.",
