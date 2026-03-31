@@ -2,24 +2,18 @@
 
 import { ProjectCard } from "@/components/project-card"
 import { SectionWrapper } from "@/components/section-wrapper"
-import { Category, projects } from "@/data/projects"
-import { motion, AnimatePresence } from "framer-motion"
-import { useState } from "react"
-import { cn } from "@/lib/utils"
+import { projects } from "@/data/projects"
+import { motion } from "framer-motion"
+import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
-const categories: (Category | "All")[] = ["All", "GIS", "Web", "ML", "Surveying", "DevOps"]
+const featuredProjects = projects.filter((p) => p.featured)
 
 export function Projects() {
-    const [filter, setFilter] = useState<Category | "All">("All")
-
-    const filteredProjects = projects.filter(
-        (project) => filter === "All" || project.category === filter
-    )
-
     return (
         <SectionWrapper id="projects" className="bg-muted/20">
             <div className="space-y-12">
-                {/* Header + filters in one row */}
+                {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -33,54 +27,55 @@ export function Projects() {
                             Projects
                         </p>
                         <h2 className="text-3xl md:text-5xl font-extrabold leading-tight font-display">
-                            Things I&apos;ve
+                            Featured
                             <br />
-                            <span className="text-primary">Built &amp; Shipped</span>
+                            <span className="text-primary">Work</span>
                         </h2>
                     </motion.div>
 
-                    {/* Filter tabs */}
-                    <motion.div
+                    <motion.p
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="flex flex-wrap gap-2"
+                        className="text-sm text-muted-foreground max-w-xs md:text-right"
                     >
-                        {categories.map((cat) => (
-                            <button
-                                key={cat}
-                                onClick={() => setFilter(cat)}
-                                className={cn(
-                                    "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200",
-                                    filter === cat
-                                        ? "bg-primary text-primary-foreground"
-                                        : "text-muted-foreground border border-border hover:text-foreground hover:border-primary/40"
-                                )}
-                            >
-                                {cat}
-                            </button>
-                        ))}
-                    </motion.div>
+                        A selection of projects I&apos;m particularly proud of — GIS tools,
+                        dashboards, and full-stack apps, all shipped.
+                    </motion.p>
                 </div>
 
-                {/* Grid */}
-                <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project, index) => (
-                            <motion.div
-                                key={project.id}
-                                layout
-                                initial={{ opacity: 0, scale: 0.96 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.96 }}
-                                transition={{ duration: 0.22, delay: index * 0.04 }}
-                                className={project.featured ? "md:col-span-2" : ""}
-                            >
-                                <ProjectCard project={project} featured={project.featured} />
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
+                {/* Featured grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {featuredProjects.map((project, index) => (
+                        <motion.div
+                            key={project.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: index * 0.08 }}
+                            className={project.featured ? "md:col-span-2" : ""}
+                        >
+                            <ProjectCard project={project} featured={project.featured} />
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* View all CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                    className="flex justify-center pt-4"
+                >
+                    <Link
+                        href="/projects"
+                        className="group inline-flex items-center gap-2.5 rounded-full border border-border bg-card px-6 py-3 text-sm font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 hover:text-foreground"
+                    >
+                        View all {projects.length} projects
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
                 </motion.div>
             </div>
         </SectionWrapper>

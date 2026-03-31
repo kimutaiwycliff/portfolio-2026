@@ -23,7 +23,7 @@ export const projects: Project[] = [
         technologies: ["Python", "PyQt", "QGIS API", "XML"],
         imageUrl: "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=1931&auto=format&fit=crop", // Map/Blueprint
         githubUrl: "https://github.com/wycliffkimutai",
-        featured: true,
+        featured: false,
         date: "2023"
     },
     {
@@ -60,7 +60,7 @@ export const projects: Project[] = [
         imageUrl: "https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074&auto=format&fit=crop", // Map/GIS
         liveUrl: "https://geojson-studio-delta.vercel.app",
         githubUrl: "https://github.com/kimutaiwycliff/Geojson-Studio",
-        featured: true,
+        featured: false,
         date: "2026"
     },
     {
@@ -72,7 +72,7 @@ export const projects: Project[] = [
         imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop", // Retail/checkout
         githubUrl: "https://github.com/kimutaiwycliff/luxe_supabase_pos",
         liveUrl: "https://luxe-pos.vercel.app/",
-        featured: true,
+        featured: false,
         date: "2026"
     },
     {
@@ -96,7 +96,7 @@ export const projects: Project[] = [
         imageUrl: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop",
         githubUrl: "https://github.com/kimutaiwycliff/job-hunter",
         liveUrl: "https://job-hunter-nu.vercel.app/",
-        featured: true,
+        featured: false,
         date: "2026"
     },
     {
