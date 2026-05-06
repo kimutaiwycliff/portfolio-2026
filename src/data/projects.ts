@@ -76,6 +76,19 @@ export const projects: Project[] = [
         date: "2026"
     },
     {
+        id: "geo-stack",
+        title: "geo-stack — Open-Source Geospatial Infrastructure",
+        description: "Reusable spatial data platform: PostGIS for writes, DuckDB + GeoParquet for analytics, Martin for live vector tiles, PMTiles for static serving, and TiTiler for raster. One codebase, three deployment modes — local M1, Render+Vercel (free), or production VPS with Caddy.",
+        longDescription: "A complete, self-hostable geospatial infrastructure stack built for production GIS workflows. Provides a FastAPI layer that unifies PostGIS spatial queries, DuckDB-powered GeoParquet analytics, and a Martin MVT tile proxy behind a single API. The ingest pipeline accepts any GDAL-readable format (GeoPackage, Shapefile ZIP, GeoJSON, KML) and loads it into PostGIS via ogr2ogr, optionally exporting GeoParquet to Cloudflare R2. A STAC catalog auto-discovers mounted parquet files. The SvelteKit frontend renders live MVT, static PMTiles, GeoJSON, and raster (COG) layers via a single declarative config file — no hardcoded layer IDs anywhere in the UI. Ships with three compose profiles: local dev with hot-reload, a zero-cost cloud deployment on Render + Vercel + Supabase + R2, and a production VPS with PgBouncer, auto-HTTPS Caddy, and nightly pg_dump backups to R2.",
+        category: "GIS",
+        technologies: ["PostGIS", "DuckDB", "GeoParquet", "FastAPI", "Python", "SvelteKit", "MapLibre GL JS", "Martin", "PMTiles", "TiTiler", "Cloudflare R2", "Caddy", "Docker", "Supabase"],
+        imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+        githubUrl: "https://github.com/kimutaiwycliff/geo-stack",
+        liveUrl: "https://geo-stackk.vercel.app/",
+        featured: true,
+        date: "2026"
+    },
+    {
         id: "route-explorer",
         title: "Route Explorer",
         description: "Full-featured ORS-powered mapping app: multi-waypoint directions with 9 travel profiles, avoid-feature toggles, up to 3 alternative routes, isochrone reachability maps, travel-time matrix, POI discovery, multi-stop route optimisation (VRP/TSP), elevation profiles, and GPX/GeoJSON export.",
