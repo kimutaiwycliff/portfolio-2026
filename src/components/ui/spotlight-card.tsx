@@ -13,7 +13,7 @@ interface SpotlightCardProps {
 export function SpotlightCard({
     children,
     className,
-    spotlightColor = "rgba(0, 212, 255, 0.10)",
+    spotlightColor = "rgba(227, 166, 62, 0.10)",
 }: SpotlightCardProps) {
     const divRef = useRef<HTMLDivElement>(null)
     const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -40,7 +40,7 @@ export function SpotlightCard({
                     background: `radial-gradient(700px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
                 }}
             />
-            <div className="relative z-10 h-full">{children}</div>
+            <div className={cn("relative z-10 h-full", className)}>{children}</div>
         </div>
     )
 }

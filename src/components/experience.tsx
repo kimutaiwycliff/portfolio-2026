@@ -1,6 +1,7 @@
 "use client"
 
 import { SectionWrapper } from "@/components/section-wrapper"
+import { SheetLabel } from "@/components/sheet-frame"
 import { experience } from "@/data/experience"
 import { motion } from "framer-motion"
 import { Briefcase } from "lucide-react"
@@ -16,10 +17,7 @@ export function Experience() {
                     transition={{ duration: 0.5 }}
                     className="max-w-2xl"
                 >
-                    <p className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase mb-4 flex items-center gap-3">
-                        <span className="h-px w-8 bg-primary" />
-                        Experience
-                    </p>
+                    <SheetLabel index="03" title="Experience" />
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight font-display">
                         Where I&apos;ve Built
                         <br />
@@ -45,7 +43,7 @@ export function Experience() {
                                 {/* Timeline dot */}
                                 <div className="absolute -left-5 md:-left-8 top-7 w-2 h-2 rounded-full bg-primary -translate-x-[3px] group-hover:scale-150 transition-transform duration-200" />
 
-                                <div className="rounded-2xl bg-card border border-border hover:border-primary/30 p-4 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                                <div className="rounded-lg bg-card border border-border hover:border-primary/30 p-4 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
                                     <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                                         <div>
                                             <span className="text-[11px] font-mono text-primary/60 mb-1 block tracking-wide">

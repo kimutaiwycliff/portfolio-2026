@@ -14,10 +14,6 @@ export function Footer() {
                     </p>
                 </div>
 
-                <p className="text-xs font-mono text-muted-foreground/60">
-                    Built with Next.js · Deployed on Vercel
-                </p>
-
                 <div className="flex items-center gap-4">
                     {socialLinks.map((social) => (
                         <Link

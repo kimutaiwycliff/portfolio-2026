@@ -1,17 +1,18 @@
 "use client"
 
 import { SectionWrapper } from "@/components/section-wrapper"
+import { SheetLabel } from "@/components/sheet-frame"
 import { SpotlightCard } from "@/components/ui/spotlight-card"
 import { skills } from "@/data/skills"
 import { motion } from "framer-motion"
 
 const categoryMeta: Record<string, { icon: string; color: string }> = {
-    "Geospatial & GIS": { icon: "🌍", color: "rgba(0, 200, 240, 0.10)" },
-    "Programming": { icon: "⚡", color: "rgba(0, 217, 122, 0.10)" },
-    "Web Development": { icon: "🌐", color: "rgba(0, 200, 240, 0.10)" },
-    "Cloud & DevOps": { icon: "☁️", color: "rgba(155, 126, 255, 0.10)" },
-    "Data & ML": { icon: "🧠", color: "rgba(240, 165, 0, 0.10)" },
-    "Surveying": { icon: "📐", color: "rgba(0, 217, 122, 0.10)" },
+    "Geospatial & GIS": { icon: "🌍", color: "rgba(227, 166, 62, 0.10)" },
+    "Programming": { icon: "⚡", color: "rgba(79, 160, 190, 0.10)" },
+    "Web Development": { icon: "🌐", color: "rgba(227, 166, 62, 0.10)" },
+    "Cloud & DevOps": { icon: "☁️", color: "rgba(139, 111, 78, 0.10)" },
+    "Data & ML": { icon: "🧠", color: "rgba(193, 80, 46, 0.10)" },
+    "Surveying": { icon: "📐", color: "rgba(107, 143, 115, 0.10)" },
 }
 
 export function Skills() {
@@ -25,10 +26,7 @@ export function Skills() {
                     transition={{ duration: 0.5 }}
                     className="max-w-2xl"
                 >
-                    <p className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase mb-4 flex items-center gap-3">
-                        <span className="h-px w-8 bg-primary" />
-                        Technical Skills
-                    </p>
+                    <SheetLabel index="02" title="Technical Skills" />
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight font-display">
                         A Toolkit Built for
                         <br />
@@ -40,7 +38,7 @@ export function Skills() {
                     {skills.map((skillGroup, index) => {
                         const meta = categoryMeta[skillGroup.category] ?? {
                             icon: "⚙️",
-                            color: "rgba(0,200,240,0.10)",
+                            color: "rgba(227,166,62,0.10)",
                         }
                         return (
                             <motion.div
@@ -52,7 +50,7 @@ export function Skills() {
                                 className="h-full"
                             >
                                 <SpotlightCard
-                                    className="h-full rounded-2xl bg-card border border-border hover:border-primary/30 transition-colors duration-300"
+                                    className="h-full rounded-lg bg-card border border-border hover:border-primary/30 transition-colors duration-300"
                                     spotlightColor={meta.color}
                                 >
                                     <div className="p-4 sm:p-6 h-full flex flex-col">

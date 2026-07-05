@@ -14,17 +14,15 @@ interface ProjectCardProps {
 export function ProjectCard({ project, featured = false }: ProjectCardProps) {
     return (
         <SpotlightCard
-            className={`group flex flex-col h-full rounded-2xl bg-card border border-border overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 ${
+            className={`group flex flex-col h-full rounded-lg bg-card border border-border overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 ${
                 featured ? "md:flex-row" : ""
             }`}
-            spotlightColor="rgba(0, 200, 240, 0.09)"
+            spotlightColor="rgba(227, 166, 62, 0.09)"
         >
             {/* Image */}
             <div
                 className={`relative flex-shrink-0 overflow-hidden ${
-                    featured
-                        ? "md:w-[45%] aspect-[4/3] md:aspect-auto"
-                        : "aspect-[16/9]"
+                    featured ? "md:w-[45%] aspect-[4/3]" : "aspect-[16/9]"
                 }`}
             >
                 <Image
@@ -52,7 +50,9 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
                             featured ? "text-xl sm:text-2xl md:text-3xl" : "text-lg sm:text-xl"
                         }`}
                     >
-                        {project.title}
+                        <Link href={`/projects/${project.id}`} className="hover:text-primary transition-colors">
+                            {project.title}
+                        </Link>
                     </h3>
                     <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
                         {project.description}
@@ -76,6 +76,12 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
                 </div>
 
                 <div className="flex items-center gap-1 pt-3 border-t border-border">
+                    <Link
+                        href={`/projects/${project.id}`}
+                        className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors px-3 py-1.5 rounded-lg hover:bg-muted"
+                    >
+                        Case Study
+                    </Link>
                     {project.githubUrl && (
                         <Link
                             href={project.githubUrl}

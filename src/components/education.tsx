@@ -1,44 +1,10 @@
 "use client"
 
 import { SectionWrapper } from "@/components/section-wrapper"
+import { SheetLabel } from "@/components/sheet-frame"
+import { education, certifications } from "@/data/education"
 import { motion } from "framer-motion"
 import { Award } from "lucide-react"
-
-const education = [
-    {
-        institution: "KCA University",
-        degree: "MSc Data Analytics",
-        period: "2022 – 2025",
-        description:
-            "Focus on statistical modeling, big data analytics, and machine learning.",
-        accent: "from-primary to-secondary",
-    },
-    {
-        institution: "JKUAT",
-        degree: "BSc Geomatics Engineering",
-        period: "2015 – 2021",
-        description:
-            "First Class Honours. Specialization in GIS, Geodesy, and Land Information Systems.",
-        accent: "from-secondary to-primary",
-    },
-    {
-        institution: "Cisco Networking Academy",
-        degree: "CCNA Routing & Switching",
-        period: "2017 – 2018",
-        description:
-            "Network infrastructure, routing protocols, and WAN technologies.",
-        accent: "from-primary/60 to-secondary/60",
-    },
-]
-
-const certifications = [
-    "Project Management",
-    "Spatial Data Science",
-    "Python for Data Science",
-    "Digital Cartography",
-    "AWS Cloud Practitioner",
-    "Deep Learning Specialization",
-]
 
 export function Education() {
     return (
@@ -52,10 +18,7 @@ export function Education() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <p className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase mb-4 flex items-center gap-3">
-                            <span className="h-px w-8 bg-primary" />
-                            Education
-                        </p>
+                        <SheetLabel index="05" title="Education" />
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight font-display">
                             Academic
                             <br />
@@ -71,7 +34,7 @@ export function Education() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="flex gap-3 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all duration-300 group"
+                                className="flex gap-3 sm:gap-4 p-4 sm:p-6 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 group"
                             >
                                 {/* Accent bar */}
                                 <div
@@ -102,8 +65,7 @@ export function Education() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.15 }}
                     >
-                        <p className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase mb-4 flex items-center gap-3">
-                            <span className="h-px w-8 bg-primary" />
+                        <p className="text-[11px] font-mono text-muted-foreground tracking-[0.2em] uppercase mb-4">
                             Certifications
                         </p>
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight font-display">

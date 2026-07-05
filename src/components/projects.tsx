@@ -2,6 +2,7 @@
 
 import { ProjectCard } from "@/components/project-card"
 import { SectionWrapper } from "@/components/section-wrapper"
+import { SheetLabel } from "@/components/sheet-frame"
 import { projects } from "@/data/projects"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
@@ -22,10 +23,7 @@ export function Projects() {
                         transition={{ duration: 0.5 }}
                         className="max-w-2xl"
                     >
-                        <p className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase mb-4 flex items-center gap-3">
-                            <span className="h-px w-8 bg-primary" />
-                            Projects
-                        </p>
+                        <SheetLabel index="04" title="Featured Work" />
                         <h2 className="text-3xl md:text-5xl font-extrabold leading-tight font-display">
                             Featured
                             <br />

@@ -44,9 +44,10 @@ export default function ProjectsPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <p className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase mb-4 flex items-center gap-3">
+                        <p className="text-[11px] font-mono tracking-[0.2em] uppercase mb-4 flex items-center gap-3">
+                            <span className="text-primary">FIELD INDEX</span>
                             <span className="h-px w-8 bg-primary" />
-                            All Projects
+                            <span className="text-muted-foreground">{projects.length} Sheets</span>
                         </p>
                         <h1 className="text-3xl md:text-5xl font-extrabold leading-tight font-display">
                             Things I&apos;ve

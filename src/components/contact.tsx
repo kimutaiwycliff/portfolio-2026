@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { SectionWrapper } from "@/components/section-wrapper"
+import { SheetLabel } from "@/components/sheet-frame"
 import { Mail, MapPin, Phone, Send, ArrowUpRight } from "lucide-react"
 import { useActionState, useEffect } from "react"
 import { submitContactForm } from "@/actions/contact"
@@ -37,10 +38,10 @@ export function Contact() {
                     transition={{ duration: 0.5 }}
                     className="text-center mb-16"
                 >
-                    <p className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase mb-4 flex items-center justify-center gap-3">
+                    <p className="text-[11px] font-mono tracking-[0.2em] uppercase mb-4 flex items-center justify-center gap-3">
+                        <span className="text-primary">SHEET 06/06</span>
                         <span className="h-px w-8 bg-primary" />
-                        Contact
-                        <span className="h-px w-8 bg-primary" />
+                        <span className="text-muted-foreground">Contact</span>
                     </p>
                     <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-5 font-display">
                         Let&apos;s Build
@@ -93,9 +94,9 @@ export function Contact() {
                         ].map(({ icon: Icon, label, value, href }) => (
                             <div
                                 key={label}
-                                className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors"
+                                className="flex items-center gap-4 p-4 rounded-md bg-card border border-border hover:border-primary/30 transition-colors"
                             >
-                                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
                                     <Icon className="w-5 h-5" />
                                 </div>
                                 <div>
@@ -132,15 +133,19 @@ export function Contact() {
                             ))}
                         </div>
 
-                        {/* Map */}
-                        <div className="w-full h-44 rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all border border-border">
+                        {/* Map — tinted toward the field-atlas palette instead of default OSM colors */}
+                        <div className="relative w-full h-44 rounded-md overflow-hidden border border-border">
                             <iframe
                                 width="100%"
                                 height="100%"
                                 src={contactDetails.mapUrl}
                                 title="Nairobi Map"
-                                style={{ border: 0 }}
+                                style={{
+                                    border: 0,
+                                    filter: "grayscale(0.85) sepia(0.35) hue-rotate(45deg) saturate(1.3) brightness(0.85) contrast(1.05)",
+                                }}
                             />
+                            <div className="absolute inset-0 graticule pointer-events-none opacity-40" />
                         </div>
                     </motion.div>
 
@@ -150,7 +155,7 @@ export function Contact() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="rounded-2xl bg-card border border-border p-4 sm:p-6 md:p-8"
+                        className="rounded-lg bg-card border border-border p-4 sm:p-6 md:p-8"
                     >
                         <form action={formAction} className="space-y-5">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -166,7 +171,7 @@ export function Contact() {
                                         name="name"
                                         placeholder="Your Name"
                                         required
-                                        className="bg-background border-border rounded-xl"
+                                        className="bg-background border-border rounded-md"
                                     />
                                 </div>
                                 <div className="space-y-1.5">
@@ -182,7 +187,7 @@ export function Contact() {
                                         type="email"
                                         placeholder="you@email.com"
                                         required
-                                        className="bg-background border-border rounded-xl"
+                                        className="bg-background border-border rounded-md"
                                     />
                                 </div>
                             </div>
@@ -199,7 +204,7 @@ export function Contact() {
                                     name="subject"
                                     placeholder="Project Inquiry"
                                     required
-                                    className="bg-background border-border rounded-xl"
+                                    className="bg-background border-border rounded-md"
                                 />
                             </div>
 
@@ -214,7 +219,7 @@ export function Contact() {
                                     id="message"
                                     name="message"
                                     placeholder="Tell me about your project..."
-                                    className="min-h-[130px] bg-background border-border rounded-xl resize-none"
+                                    className="min-h-[130px] bg-background border-border rounded-md resize-none"
                                     required
                                 />
                             </div>
