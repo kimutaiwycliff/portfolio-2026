@@ -6,12 +6,13 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { SectionWrapper } from "@/components/section-wrapper"
 import { SheetLabel } from "@/components/sheet-frame"
+import { Magnetic } from "@/components/ui/magnetic"
+import { Reveal } from "@/components/ui/reveal"
 import { Mail, MapPin, Phone, Send, ArrowUpRight } from "lucide-react"
 import { useActionState, useEffect } from "react"
 import { submitContactForm } from "@/actions/contact"
 import { toast } from "sonner"
 import { contactDetails } from "@/data/contact"
-import { motion } from "framer-motion"
 import { socialLinks } from "@/data/socials"
 
 export function Contact() {
@@ -31,10 +32,9 @@ export function Contact() {
         <SectionWrapper id="contact" className="bg-muted/20">
             <div className="max-w-5xl mx-auto">
                 {/* Header */}
-                <motion.div
+                <Reveal
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                     className="text-center mb-16"
                 >
@@ -53,22 +53,27 @@ export function Contact() {
                         interesting collaborations.
                     </p>
 
-                    {/* Big email CTA */}
-                    <a
-                        href={`mailto:${contactDetails.email}`}
-                        className="group inline-flex items-center gap-2 text-base sm:text-xl md:text-2xl font-bold text-primary hover:text-primary/80 transition-colors break-all sm:break-normal"
+                    {/* Big email CTA — stamps down like ink on a field form */}
+                    <Reveal
+                        initial={{ opacity: 0, scale: 0.7, rotate: -8 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                        transition={{ delay: 0.25, type: "spring", stiffness: 200, damping: 12 }}
                     >
-                        {contactDetails.email}
-                        <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </a>
-                </motion.div>
+                        <a
+                            href={`mailto:${contactDetails.email}`}
+                            className="group inline-flex items-center gap-2 text-base sm:text-xl md:text-2xl font-bold text-primary hover:text-primary/80 transition-colors break-all sm:break-normal"
+                        >
+                            {contactDetails.email}
+                            <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </a>
+                    </Reveal>
+                </Reveal>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
                     {/* Contact info */}
-                    <motion.div
+                    <Reveal
                         initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}
                         className="space-y-6"
                     >
@@ -147,13 +152,12 @@ export function Contact() {
                             />
                             <div className="absolute inset-0 graticule pointer-events-none opacity-40" />
                         </div>
-                    </motion.div>
+                    </Reveal>
 
                     {/* Form */}
-                    <motion.div
+                    <Reveal
                         initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}
                         className="rounded-lg bg-card border border-border p-4 sm:p-6 md:p-8"
                     >
@@ -224,23 +228,25 @@ export function Contact() {
                                 />
                             </div>
 
-                            <Button
-                                type="submit"
-                                className="w-full rounded-full gap-2"
-                                disabled={isPending}
-                                size="lg"
-                            >
-                                {isPending ? (
-                                    "Sending…"
-                                ) : (
-                                    <>
-                                        Send Message
-                                        <Send className="w-4 h-4" />
-                                    </>
-                                )}
-                            </Button>
+                            <Magnetic strength={0.2} className="block">
+                                <Button
+                                    type="submit"
+                                    className="w-full rounded-full gap-2"
+                                    disabled={isPending}
+                                    size="lg"
+                                >
+                                    {isPending ? (
+                                        "Sending…"
+                                    ) : (
+                                        <>
+                                            Send Message
+                                            <Send className="w-4 h-4" />
+                                        </>
+                                    )}
+                                </Button>
+                            </Magnetic>
                         </form>
-                    </motion.div>
+                    </Reveal>
                 </div>
             </div>
         </SectionWrapper>

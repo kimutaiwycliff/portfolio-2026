@@ -8,6 +8,7 @@ import dynamic from "next/dynamic"
 import { useRef, useEffect, useState } from "react"
 import { socialLinks } from "@/data/socials"
 import { profileImage } from "@/data/images"
+import { Magnetic } from "@/components/ui/magnetic"
 
 // maplibre-gl is a large dependency (~200kb) — load it only on the client,
 // after the hero has already painted, instead of blocking first render.
@@ -92,6 +93,42 @@ const item = {
     },
 }
 
+// Per-letter cascade for the name — two lines animate as independent waves
+// instead of fading in as one solid block.
+const letterContainer = (delay: number) => ({
+    hidden: {},
+    visible: {
+        transition: { staggerChildren: 0.03, delayChildren: delay },
+    },
+})
+
+const letterVariant = {
+    hidden: { opacity: 0, y: 36, rotateX: -70 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
+    },
+}
+
+function CascadeText({ text, delay }: { text: string; delay: number }) {
+    return (
+        <motion.span
+            variants={letterContainer(delay)}
+            initial="hidden"
+            animate="visible"
+            className="inline-block"
+        >
+            {text.split("").map((ch, i) => (
+                <motion.span key={i} variants={letterVariant} className="inline-block">
+                    {ch}
+                </motion.span>
+            ))}
+        </motion.span>
+    )
+}
+
 export function Hero() {
     const ref = useRef<HTMLElement>(null)
     const { scrollYProgress } = useScroll({
@@ -146,18 +183,18 @@ export function Hero() {
                             </span>
                         </motion.div>
 
-                        {/* Name */}
-                        <motion.h1
-                            variants={item}
+                        {/* Name — letter cascade, two independently-timed waves */}
+                        <h1
                             className="font-display font-extrabold leading-[0.9] tracking-tight uppercase"
+                            style={{ perspective: 600 }}
                         >
                             <span className="block text-[clamp(3.2rem,9vw,7.5rem)] text-foreground">
-                                WYCLIFF
+                                <CascadeText text="WYCLIFF" delay={0.4} />
                             </span>
                             <span className="block text-[clamp(3.2rem,9vw,7.5rem)] text-primary">
-                                KIMUTAI
+                                <CascadeText text="KIMUTAI" delay={0.65} />
                             </span>
-                        </motion.h1>
+                        </h1>
 
                         {/* Typewriter role */}
                         <motion.div variants={item} className="h-8 flex items-center gap-2">
@@ -176,21 +213,25 @@ export function Hero() {
                             systems that transform geographic data into actionable insights.
                         </motion.p>
 
-                        {/* CTAs */}
+                        {/* CTAs — drift toward the cursor within reach */}
                         <motion.div variants={item} className="flex flex-wrap gap-3">
-                            <Link
-                                href="#projects"
-                                className="group inline-flex items-center gap-2 px-6 py-3 rounded-md bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-all duration-200 hover:gap-3"
-                            >
-                                View Projects
-                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                            </Link>
-                            <Link
-                                href="#contact"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-border text-muted-foreground hover:text-foreground hover:border-primary/40 text-sm font-medium transition-all duration-200"
-                            >
-                                Get in Touch
-                            </Link>
+                            <Magnetic>
+                                <Link
+                                    href="#projects"
+                                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-md bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-all duration-200 hover:gap-3"
+                                >
+                                    View Projects
+                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                                </Link>
+                            </Magnetic>
+                            <Magnetic>
+                                <Link
+                                    href="#contact"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-border text-muted-foreground hover:text-foreground hover:border-primary/40 text-sm font-medium transition-all duration-200"
+                                >
+                                    Get in Touch
+                                </Link>
+                            </Magnetic>
                         </motion.div>
 
                         {/* Socials */}

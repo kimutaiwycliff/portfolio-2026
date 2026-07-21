@@ -2,6 +2,7 @@
 
 import { SectionWrapper } from "@/components/section-wrapper"
 import { SheetLabel, TickCorners } from "@/components/sheet-frame"
+import { Reveal } from "@/components/ui/reveal"
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 
@@ -65,10 +66,9 @@ export function About() {
         <SectionWrapper id="about">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-16 lg:gap-20 items-start">
                 {/* Left: content */}
-                <motion.div
+                <Reveal
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
                     <SheetLabel index="01" title="About Me" coordinate="-1.2921°S, 36.8219°E" />
@@ -96,13 +96,12 @@ export function About() {
                         complex spatial data, automate workflows, and drive decision-making for
                         land administration and urban planning.
                     </p>
-                </motion.div>
+                </Reveal>
 
                 {/* Right: field data plate — stats + core tools, no stock photo */}
-                <motion.div
+                <Reveal
                     initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                 >
                     <TickCorners>
@@ -130,7 +129,7 @@ export function About() {
                             </div>
                         </div>
                     </TickCorners>
-                </motion.div>
+                </Reveal>
             </div>
         </SectionWrapper>
     )

@@ -3,8 +3,9 @@
 import { ProjectCard } from "@/components/project-card"
 import { SectionWrapper } from "@/components/section-wrapper"
 import { SheetLabel } from "@/components/sheet-frame"
+import { Reveal } from "@/components/ui/reveal"
+import { TiltCard } from "@/components/ui/tilt-card"
 import { projects } from "@/data/projects"
-import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
@@ -16,10 +17,9 @@ export function Projects() {
             <div className="space-y-12">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                    <motion.div
+                    <Reveal
                         initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         className="max-w-2xl"
                     >
@@ -29,45 +29,48 @@ export function Projects() {
                             <br />
                             <span className="text-primary">Work</span>
                         </h2>
-                    </motion.div>
+                    </Reveal>
 
-                    <motion.p
+                    <Reveal
                         initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="text-sm text-muted-foreground max-w-xs md:text-right"
                     >
                         A selection of projects I&apos;m particularly proud of — GIS tools,
                         dashboards, and full-stack apps, all shipped.
-                    </motion.p>
+                    </Reveal>
                 </div>
 
-                {/* Featured grid — cards unfurl open like a survey sheet dropping down */}
+                {/* Featured grid — cards shuffle in alternating from left and right */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {featuredProjects.map((project, index) => (
-                        <motion.div
-                            key={project.id}
-                            initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)", y: -8 }}
-                            whileInView={{ opacity: 1, clipPath: "inset(0 0 0% 0)", y: 0 }}
-                            viewport={{ once: true, margin: "-60px" }}
-                            transition={{
-                                duration: 0.6,
-                                delay: index * 0.1,
-                                ease: [0.16, 1, 0.3, 1],
-                            }}
-                            className={project.featured ? "md:col-span-2" : ""}
-                        >
-                            <ProjectCard project={project} featured={project.featured} />
-                        </motion.div>
-                    ))}
+                    {featuredProjects.map((project, index) => {
+                        const fromLeft = index % 2 === 0
+                        return (
+                            <Reveal
+                                key={project.id}
+                                initial={{ opacity: 0, x: fromLeft ? -70 : 70, rotate: fromLeft ? -2.5 : 2.5 }}
+                                animate={{ opacity: 1, x: 0, rotate: 0 }}
+                                margin="-60px"
+                                transition={{
+                                    duration: 0.65,
+                                    delay: (index % 3) * 0.1,
+                                    ease: [0.16, 1, 0.3, 1],
+                                }}
+                                className={project.featured ? "md:col-span-2" : ""}
+                            >
+                                <TiltCard maxTilt={3} className="h-full">
+                                    <ProjectCard project={project} featured={project.featured} />
+                                </TiltCard>
+                            </Reveal>
+                        )
+                    })}
                 </div>
 
                 {/* View all CTA */}
-                <motion.div
+                <Reveal
                     initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.2 }}
                     className="flex justify-center pt-4"
                 >
@@ -78,7 +81,7 @@ export function Projects() {
                         View all {projects.length} projects
                         <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </Link>
-                </motion.div>
+                </Reveal>
             </div>
         </SectionWrapper>
     )

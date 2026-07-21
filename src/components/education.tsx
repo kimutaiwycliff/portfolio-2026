@@ -2,8 +2,8 @@
 
 import { SectionWrapper } from "@/components/section-wrapper"
 import { SheetLabel } from "@/components/sheet-frame"
+import { Reveal } from "@/components/ui/reveal"
 import { education, certifications } from "@/data/education"
-import { motion } from "framer-motion"
 import { Award } from "lucide-react"
 
 export function Education() {
@@ -12,10 +12,9 @@ export function Education() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-20">
                 {/* Education — 3 cols */}
                 <div className="lg:col-span-3 space-y-8">
-                    <motion.div
+                    <Reveal
                         initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
                         <SheetLabel index="05" title="Education" />
@@ -24,16 +23,16 @@ export function Education() {
                             <br />
                             <span className="text-primary">Foundation</span>
                         </h2>
-                    </motion.div>
+                    </Reveal>
 
                     <div className="space-y-4">
                         {education.map((edu, index) => (
-                            <motion.div
+                            <Reveal
                                 key={index}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                initial={{ opacity: 0, x: -50, rotate: -1.5 }}
+                                animate={{ opacity: 1, x: 0, rotate: 0 }}
+                                margin="-40px"
+                                transition={{ duration: 0.55, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                                 className="flex gap-3 sm:gap-4 p-4 sm:p-6 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 group"
                             >
                                 {/* Accent bar */}
@@ -52,17 +51,16 @@ export function Education() {
                                     </p>
                                     <p className="text-sm text-muted-foreground">{edu.description}</p>
                                 </div>
-                            </motion.div>
+                            </Reveal>
                         ))}
                     </div>
                 </div>
 
                 {/* Certifications — 2 cols */}
                 <div className="lg:col-span-2 space-y-8">
-                    <motion.div
+                    <Reveal
                         initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.15 }}
                     >
                         <p className="text-[11px] font-mono text-muted-foreground tracking-[0.2em] uppercase mb-4">
@@ -73,21 +71,21 @@ export function Education() {
                             <br />
                             <span className="text-primary">Learning</span>
                         </h2>
-                    </motion.div>
+                    </Reveal>
 
                     <div className="space-y-2.5">
                         {certifications.map((cert, index) => (
-                            <motion.div
+                            <Reveal
                                 key={index}
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: index * 0.07 }}
+                                initial={{ opacity: 0, x: 50, rotate: 1.5 }}
+                                animate={{ opacity: 1, x: 0, rotate: 0 }}
+                                margin="-40px"
+                                transition={{ duration: 0.45, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
                                 className="flex items-center gap-3 p-4 rounded-xl bg-card border border-border hover:border-primary/30 hover:bg-primary/5 transition-all duration-200 cursor-default"
                             >
                                 <Award className="w-4 h-4 text-primary flex-shrink-0" />
                                 <span className="text-sm font-medium">{cert}</span>
-                            </motion.div>
+                            </Reveal>
                         ))}
                     </div>
                 </div>

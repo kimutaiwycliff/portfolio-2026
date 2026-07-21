@@ -2,9 +2,10 @@
 
 import { SectionWrapper } from "@/components/section-wrapper"
 import { SheetLabel } from "@/components/sheet-frame"
+import { Reveal } from "@/components/ui/reveal"
 import { SpotlightCard } from "@/components/ui/spotlight-card"
+import { TiltCard } from "@/components/ui/tilt-card"
 import { skills } from "@/data/skills"
-import { motion } from "framer-motion"
 
 const categoryMeta: Record<string, { icon: string; color: string }> = {
     "Geospatial & GIS": { icon: "🌍", color: "rgba(227, 166, 62, 0.10)" },
@@ -19,10 +20,9 @@ export function Skills() {
     return (
         <SectionWrapper id="skills" className="bg-muted/20">
             <div className="space-y-12">
-                <motion.div
+                <Reveal
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                     className="max-w-2xl"
                 >
@@ -32,7 +32,7 @@ export function Skills() {
                         <br />
                         <span className="text-primary">Complex Problems</span>
                     </h2>
-                </motion.div>
+                </Reveal>
 
                 <div
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
@@ -43,44 +43,47 @@ export function Skills() {
                             icon: "⚙️",
                             color: "rgba(227,166,62,0.10)",
                         }
+                        const fromTop = index % 2 === 0
+                        const origin = fromTop ? "top center" : "bottom center"
                         return (
-                            <motion.div
+                            <Reveal
                                 key={skillGroup.category}
-                                initial={{ opacity: 0, rotateX: -35, y: 24 }}
-                                whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-                                viewport={{ once: true, margin: "-40px" }}
+                                initial={{ opacity: 0, rotateX: fromTop ? -35 : 35, y: 24, transformOrigin: origin }}
+                                animate={{ opacity: 1, rotateX: 0, y: 0, transformOrigin: origin }}
+                                margin="-40px"
                                 transition={{
                                     duration: 0.55,
                                     delay: index * 0.08,
                                     ease: [0.16, 1, 0.3, 1],
                                 }}
-                                style={{ transformOrigin: "top center" }}
-                                className="h-full"
+                                className="h-full transform-3d"
                             >
-                                <SpotlightCard
-                                    className="h-full rounded-lg bg-card border border-border hover:border-primary/30 transition-colors duration-300"
-                                    spotlightColor={meta.color}
-                                >
-                                    <div className="p-4 sm:p-6 h-full flex flex-col">
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <span className="text-2xl">{meta.icon}</span>
-                                            <h3 className="font-bold text-base font-display">
-                                                {skillGroup.category}
-                                            </h3>
+                                <TiltCard maxTilt={4} className="h-full">
+                                    <SpotlightCard
+                                        className="h-full rounded-lg bg-card border border-border hover:border-primary/30 transition-colors duration-300"
+                                        spotlightColor={meta.color}
+                                    >
+                                        <div className="p-4 sm:p-6 h-full flex flex-col">
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <span className="text-2xl">{meta.icon}</span>
+                                                <h3 className="font-bold text-base font-display">
+                                                    {skillGroup.category}
+                                                </h3>
+                                            </div>
+                                            <div className="flex flex-wrap gap-2">
+                                                {skillGroup.items.map((item) => (
+                                                    <span
+                                                        key={item}
+                                                        className="px-2.5 py-1 rounded-full text-xs font-mono bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors duration-200 cursor-default"
+                                                    >
+                                                        {item}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
-                                        <div className="flex flex-wrap gap-2">
-                                            {skillGroup.items.map((item) => (
-                                                <span
-                                                    key={item}
-                                                    className="px-2.5 py-1 rounded-full text-xs font-mono bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors duration-200 cursor-default"
-                                                >
-                                                    {item}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </SpotlightCard>
-                            </motion.div>
+                                    </SpotlightCard>
+                                </TiltCard>
+                            </Reveal>
                         )
                     })}
                 </div>
