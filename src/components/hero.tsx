@@ -4,10 +4,29 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowDown, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import { useRef, useEffect, useState } from "react"
 import { socialLinks } from "@/data/socials"
 import { profileImage } from "@/data/images"
-import { CareerMap } from "@/components/career-map"
+
+// maplibre-gl is a large dependency (~200kb) — load it only on the client,
+// after the hero has already painted, instead of blocking first render.
+const CareerMap = dynamic(
+    () => import("@/components/career-map").then((mod) => mod.CareerMap),
+    {
+        ssr: false,
+        loading: () => (
+            <div className="relative w-full h-full min-h-[320px] rounded-lg overflow-hidden border border-border">
+                <div className="absolute inset-0 graticule opacity-60" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-muted-foreground animate-pulse">
+                        Loading traverse…
+                    </span>
+                </div>
+            </div>
+        ),
+    }
+)
 
 const roles = [
     "Geospatial Engineer",

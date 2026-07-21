@@ -3,10 +3,18 @@
 import { SectionWrapper } from "@/components/section-wrapper"
 import { SheetLabel } from "@/components/sheet-frame"
 import { experience } from "@/data/experience"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { Briefcase } from "lucide-react"
+import { useRef } from "react"
 
 export function Experience() {
+    const timelineRef = useRef<HTMLDivElement>(null)
+    const { scrollYProgress } = useScroll({
+        target: timelineRef,
+        offset: ["start 85%", "end 60%"],
+    })
+    const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
+
     return (
         <SectionWrapper id="experience">
             <div className="space-y-12">
@@ -26,9 +34,13 @@ export function Experience() {
                 </motion.div>
 
                 {/* Timeline */}
-                <div className="relative pl-5 md:pl-8">
-                    {/* Gradient vertical line */}
-                    <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/40 to-transparent" />
+                <div ref={timelineRef} className="relative pl-5 md:pl-8">
+                    {/* Faint track + traversal line that grows with scroll, like a surveyed route */}
+                    <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
+                    <motion.div
+                        className="absolute left-0 top-0 w-px bg-gradient-to-b from-primary via-primary to-primary/30 origin-top"
+                        style={{ height: "100%", scaleY: lineScale }}
+                    />
 
                     <div className="space-y-8">
                         {experience.map((job, index) => (

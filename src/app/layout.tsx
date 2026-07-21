@@ -7,6 +7,8 @@ import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { Cursor } from "@/components/cursor";
+import { PageTransition } from "@/components/page-transition";
 
 const bigShoulders = Big_Shoulders({
     variable: "--font-display",
@@ -52,9 +54,13 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <MotionConfig reducedMotion="user">
+                        <div className="grain-overlay" aria-hidden />
+                        <Cursor />
                         <ScrollProgress />
                         <Navigation />
-                        <main className="flex-1 w-full">{children}</main>
+                        <main className="flex-1 w-full">
+                            <PageTransition>{children}</PageTransition>
+                        </main>
                         <Footer />
                         <Toaster />
                     </MotionConfig>

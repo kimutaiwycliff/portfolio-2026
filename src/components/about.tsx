@@ -2,19 +2,46 @@
 
 import { SectionWrapper } from "@/components/section-wrapper"
 import { SheetLabel, TickCorners } from "@/components/sheet-frame"
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
 
 const stats = [
-    { label: "Years Experience", value: "3+", num: 3 },
-    { label: "Daily Records Processed", value: "10k+", num: 10 },
-    { label: "Field Teams Led", value: "20+", num: 20 },
-    { label: "Projects Shipped", value: "15+", num: 15 },
+    { label: "Years Experience", value: "3+", num: 3, suffix: "+" },
+    { label: "Daily Records Processed", value: "10k+", num: 10, suffix: "k+" },
+    { label: "Field Teams Led", value: "20+", num: 20, suffix: "+" },
+    { label: "Projects Shipped", value: "15+", num: 15, suffix: "+" },
 ]
 
-function StatBlock({ label, value, delay }: { label: string; value: string; delay: number }) {
+function StatBlock({
+    label,
+    num,
+    suffix,
+    delay,
+}: {
+    label: string
+    num: number
+    suffix: string
+    delay: number
+}) {
     const ref = useRef<HTMLDivElement>(null)
     const inView = useInView(ref, { once: true, margin: "-60px" })
+    const count = useMotionValue(0)
+    const rounded = useTransform(count, (v) => Math.round(v))
+    const [display, setDisplay] = useState(0)
+
+    useEffect(() => {
+        if (!inView) return
+        const controls = animate(count, num, {
+            duration: 1.1,
+            delay,
+            ease: [0.16, 1, 0.3, 1],
+        })
+        const unsubscribe = rounded.on("change", setDisplay)
+        return () => {
+            controls.stop()
+            unsubscribe()
+        }
+    }, [inView, num, delay, count, rounded])
 
     return (
         <motion.div
@@ -24,8 +51,9 @@ function StatBlock({ label, value, delay }: { label: string; value: string; dela
             transition={{ duration: 0.5, delay }}
             className="flex flex-col"
         >
-            <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary font-display leading-none">
-                {value}
+            <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary font-display leading-none tabular-nums">
+                {display}
+                {suffix}
             </span>
             <span className="text-sm text-muted-foreground mt-1.5 leading-snug">{label}</span>
         </motion.div>

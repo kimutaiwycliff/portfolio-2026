@@ -43,15 +43,19 @@ export function Projects() {
                     </motion.p>
                 </div>
 
-                {/* Featured grid */}
+                {/* Featured grid — cards unfurl open like a survey sheet dropping down */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {featuredProjects.map((project, index) => (
                         <motion.div
                             key={project.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.08 }}
+                            initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)", y: -8 }}
+                            whileInView={{ opacity: 1, clipPath: "inset(0 0 0% 0)", y: 0 }}
+                            viewport={{ once: true, margin: "-60px" }}
+                            transition={{
+                                duration: 0.6,
+                                delay: index * 0.1,
+                                ease: [0.16, 1, 0.3, 1],
+                            }}
                             className={project.featured ? "md:col-span-2" : ""}
                         >
                             <ProjectCard project={project} featured={project.featured} />
