@@ -9,6 +9,9 @@ import { Toaster } from "@/components/ui/sonner";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { Cursor } from "@/components/cursor";
 import { PageTransition } from "@/components/page-transition";
+import { StructuredData } from "@/components/structured-data";
+
+const SITE_URL = "https://wycliffkimutai.co.ke";
 
 const bigShoulders = Big_Shoulders({
     variable: "--font-display",
@@ -30,11 +33,71 @@ const geistMono = Geist_Mono({
     display: "swap",
 });
 
+const title = "Wycliff Kimutai | Full-Stack Developer & GIS / Geospatial Engineer";
+const description =
+    "Wycliff Kimutai — Full-Stack Developer, GIS Analyst, and Geospatial Engineer based in Nairobi, Kenya. Building web maps, spatial data systems, and production GIS software with React, Next.js, PostGIS, and QGIS.";
+
 export const metadata: Metadata = {
-    title: "Wycliff Kimutai | Geospatial Data Scientist & Full-Stack Developer",
-    description:
-        "Portfolio of Wycliff Kimutai — GIS expert, ML engineer, and full-stack developer specializing in geospatial AI and land administration systems.",
-    keywords: ["GIS", "Geospatial", "Data Science", "Full-Stack", "Next.js", "Nairobi"],
+    metadataBase: new URL(SITE_URL),
+    title: {
+        default: title,
+        template: "%s | Wycliff Kimutai",
+    },
+    description,
+    keywords: [
+        "Wycliff Kimutai",
+        "Full-Stack Developer",
+        "GIS Analyst",
+        "GIS Developer",
+        "Geospatial Engineer",
+        "Geospatial Developer",
+        "Web Maps",
+        "Web Mapping Developer",
+        "PostGIS",
+        "QGIS Developer",
+        "Remote Sensing",
+        "Spatial Data Science",
+        "Next.js Developer Nairobi",
+        "Nairobi Kenya",
+    ],
+    authors: [{ name: "Wycliff Kimutai", url: SITE_URL }],
+    creator: "Wycliff Kimutai",
+    publisher: "Wycliff Kimutai",
+    alternates: {
+        canonical: "/",
+    },
+    openGraph: {
+        title,
+        description,
+        url: SITE_URL,
+        siteName: "Wycliff Kimutai",
+        locale: "en_US",
+        type: "website",
+        images: [
+            {
+                url: "/profile.jpeg",
+                width: 800,
+                height: 800,
+                alt: "Wycliff Kimutai",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: ["/profile.jpeg"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
+    },
 };
 
 export default function RootLayout({
@@ -54,6 +117,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <MotionConfig reducedMotion="user">
+                        <StructuredData />
                         <div className="grain-overlay" aria-hidden />
                         <Cursor />
                         <ScrollProgress />

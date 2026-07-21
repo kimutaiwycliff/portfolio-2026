@@ -46,6 +46,7 @@ export function Projects() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {featuredProjects.map((project, index) => {
                         const fromLeft = index % 2 === 0
+                        const isHero = index === 0
                         return (
                             <Reveal
                                 key={project.id}
@@ -57,10 +58,10 @@ export function Projects() {
                                     delay: (index % 3) * 0.1,
                                     ease: [0.16, 1, 0.3, 1],
                                 }}
-                                className={project.featured ? "md:col-span-2" : ""}
+                                className={isHero ? "md:col-span-2" : ""}
                             >
                                 <TiltCard maxTilt={3} className="h-full">
-                                    <ProjectCard project={project} featured={project.featured} />
+                                    <ProjectCard project={project} featured={isHero} />
                                 </TiltCard>
                             </Reveal>
                         )

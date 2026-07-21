@@ -18,8 +18,24 @@ export async function generateMetadata({
     const project = projects.find((p) => p.id === slug)
     if (!project) return {}
     return {
-        title: `${project.title} | Wycliff Kimutai`,
+        title: project.title,
         description: project.description,
+        alternates: {
+            canonical: `/projects/${project.id}`,
+        },
+        openGraph: {
+            title: project.title,
+            description: project.description,
+            url: `/projects/${project.id}`,
+            type: "article",
+            images: [{ url: project.imageUrl }],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: project.title,
+            description: project.description,
+            images: [project.imageUrl],
+        },
     }
 }
 

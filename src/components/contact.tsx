@@ -9,6 +9,7 @@ import { SheetLabel } from "@/components/sheet-frame"
 import { Magnetic } from "@/components/ui/magnetic"
 import { Reveal } from "@/components/ui/reveal"
 import { Mail, MapPin, Phone, Send, ArrowUpRight } from "lucide-react"
+import { WhatsAppIcon } from "@/components/icons/whatsapp-icon"
 import { useActionState, useEffect } from "react"
 import { submitContactForm } from "@/actions/contact"
 import { toast } from "sonner"
@@ -91,6 +92,12 @@ export function Contact() {
                                 href: `tel:${contactDetails.phone.replace(/\s/g, "")}`,
                             },
                             {
+                                icon: WhatsAppIcon,
+                                label: "WhatsApp",
+                                value: contactDetails.phone,
+                                href: `https://wa.me/${contactDetails.whatsapp}`,
+                            },
+                            {
                                 icon: MapPin,
                                 label: "Location",
                                 value: contactDetails.location,
@@ -111,6 +118,8 @@ export function Contact() {
                                     {href ? (
                                         <a
                                             href={href}
+                                            target={href.startsWith("http") ? "_blank" : undefined}
+                                            rel={href.startsWith("http") ? "noreferrer" : undefined}
                                             className="font-medium hover:text-primary transition-colors text-sm"
                                         >
                                             {value}
