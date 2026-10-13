@@ -1,26 +1,31 @@
+// Grouped by what I actually use day to day; every item appears in a project or role on this site.
 export const skills = [
     {
-        category: "Geospatial & GIS",
-        items: ["ArcGIS Pro", "QGIS", "GeoServer", "PostGIS", "Google Earth Engine", "GDAL", "Mapbox", "Leaflet"]
+        category: "Languages",
+        items: ["TypeScript", "Python", "SQL", "Go", "Rust"]
     },
     {
-        category: "Programming",
-        items: ["Python", "JavaScript", "TypeScript", "Rust", "SQL", "Go"]
+        category: "Web & mobile",
+        items: ["React", "Next.js", "SvelteKit", "Angular", "React Native / Expo", "Tauri", "Tailwind CSS"]
     },
     {
-        category: "Web Development",
-        items: ["React", "Next.js", "Angular", "Node.js", "Tailwind CSS", "Esri JS API"]
+        category: "Backend & data",
+        items: ["Node.js", "FastAPI", "PostgreSQL", "Redis", "Celery / BullMQ", "DuckDB", "REST", "gRPC", "Offline sync (PowerSync)"]
     },
     {
-        category: "Cloud & DevOps",
-        items: ["Docker", "Kubernetes", "AWS", "Azure", "Terraform", "Ansible", "CI/CD"]
+        category: "Geospatial",
+        items: ["PostGIS", "GeoServer (WMS/WFS/WCS)", "QGIS / PyQGIS", "GDAL", "MapLibre GL", "Martin / PMTiles", "TiTiler / STAC", "Google Earth Engine"]
+    },
+    {
+        category: "Infrastructure",
+        items: ["Docker / Compose", "GitHub Actions", "Caddy / Nginx", "Prometheus / Grafana", "Cloudflare R2", "AWS", "Vercel"]
     },
     {
         category: "Data & ML",
-        items: ["PostgreSQL", "MongoDB", "TensorFlow", "ML Pipelines", "Data Analytics", "Pandas/Numpy"]
+        items: ["pandas / NumPy", "TensorFlow (ANN forecasting)", "scikit-learn"]
     },
     {
         category: "Surveying",
-        items: ["GPS RTK", "Static Surveys", "Engineering Surveys", "Topographic Mapping"]
+        items: ["GPS RTK / static", "Engineering & topographic surveys"]
     }
 ]

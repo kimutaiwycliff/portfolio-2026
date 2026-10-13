@@ -9,9 +9,9 @@ const personSchema = {
     name: "Wycliff Kimutai",
     url: SITE_URL,
     image: `${SITE_URL}/profile.jpeg`,
-    jobTitle: "Geospatial Engineer & Full-Stack Developer",
+    jobTitle: "Software Engineer",
     description:
-        "Geospatial Engineer, GIS Analyst, and Full-Stack Developer specializing in web maps, spatial data systems, and land administration software.",
+        "Software engineer building web, mobile and backend systems end to end, specialising in geospatial software for land administration and climate risk.",
     address: {
         "@type": "PostalAddress",
         addressLocality: "Nairobi",
@@ -32,7 +32,10 @@ const personSchema = {
         },
     ],
     knowsAbout: [
+        "Software Engineering",
         "Full-Stack Development",
+        "Mobile Development",
+        "Backend Development",
         "Geospatial Engineering",
         "GIS Analysis",
         "Web Maps",

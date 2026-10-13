@@ -3,90 +3,57 @@
 import { SectionWrapper } from "@/components/section-wrapper"
 import { SheetLabel } from "@/components/sheet-frame"
 import { Reveal } from "@/components/ui/reveal"
-import { SpotlightCard } from "@/components/ui/spotlight-card"
-import { TiltCard } from "@/components/ui/tilt-card"
 import { skills } from "@/data/skills"
 
-const categoryMeta: Record<string, { icon: string; color: string }> = {
-    "Geospatial & GIS": { icon: "🌍", color: "rgba(227, 166, 62, 0.10)" },
-    "Programming": { icon: "⚡", color: "rgba(79, 160, 190, 0.10)" },
-    "Web Development": { icon: "🌐", color: "rgba(227, 166, 62, 0.10)" },
-    "Cloud & DevOps": { icon: "☁️", color: "rgba(139, 111, 78, 0.10)" },
-    "Data & ML": { icon: "🧠", color: "rgba(193, 80, 46, 0.10)" },
-    "Surveying": { icon: "📐", color: "rgba(107, 143, 115, 0.10)" },
-}
-
+// A compact legend, like the key on a map sheet: one row per group. The
+// projects carry the evidence; this is just the index.
 export function Skills() {
     return (
         <SectionWrapper id="skills" className="bg-muted/20">
-            <div className="space-y-12">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16 items-start">
                 <Reveal
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="max-w-2xl"
                 >
-                    <SheetLabel index="02" title="Technical Skills" />
+                    <SheetLabel index="02" title="Toolkit" />
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight font-display">
-                        A Toolkit Built for
+                        What I
                         <br />
-                        <span className="text-primary">Complex Problems</span>
+                        <span className="text-primary">Work With</span>
                     </h2>
+                    <p className="mt-4 text-muted-foreground leading-relaxed max-w-sm">
+                        Each of these shows up in a role or a project further down the page.
+                    </p>
                 </Reveal>
 
-                <div
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                    style={{ perspective: 1000 }}
+                <Reveal
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="rounded-lg border border-border bg-card divide-y divide-border"
                 >
-                    {skills.map((skillGroup, index) => {
-                        const meta = categoryMeta[skillGroup.category] ?? {
-                            icon: "⚙️",
-                            color: "rgba(227,166,62,0.10)",
-                        }
-                        const fromTop = index % 2 === 0
-                        const origin = fromTop ? "top center" : "bottom center"
-                        return (
-                            <Reveal
-                                key={skillGroup.category}
-                                initial={{ opacity: 0, rotateX: fromTop ? -35 : 35, y: 24, transformOrigin: origin }}
-                                animate={{ opacity: 1, rotateX: 0, y: 0, transformOrigin: origin }}
-                                margin="-40px"
-                                transition={{
-                                    duration: 0.55,
-                                    delay: index * 0.08,
-                                    ease: [0.16, 1, 0.3, 1],
-                                }}
-                                className="h-full transform-3d"
-                            >
-                                <TiltCard maxTilt={4} className="h-full">
-                                    <SpotlightCard
-                                        className="h-full rounded-lg bg-card border border-border hover:border-primary/30 transition-colors duration-300"
-                                        spotlightColor={meta.color}
+                    {skills.map((group) => (
+                        <div
+                            key={group.category}
+                            className="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-2 sm:gap-6 px-4 sm:px-6 py-4"
+                        >
+                            <h3 className="font-mono text-[11px] tracking-[0.18em] uppercase text-primary pt-1">
+                                {group.category}
+                            </h3>
+                            <ul className="flex flex-wrap gap-x-2 gap-y-2">
+                                {group.items.map((item) => (
+                                    <li
+                                        key={item}
+                                        className="px-2.5 py-1 rounded-full text-xs font-mono bg-muted text-muted-foreground"
                                     >
-                                        <div className="p-4 sm:p-6 h-full flex flex-col">
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <span className="text-2xl">{meta.icon}</span>
-                                                <h3 className="font-bold text-base font-display">
-                                                    {skillGroup.category}
-                                                </h3>
-                                            </div>
-                                            <div className="flex flex-wrap gap-2">
-                                                {skillGroup.items.map((item) => (
-                                                    <span
-                                                        key={item}
-                                                        className="px-2.5 py-1 rounded-full text-xs font-mono bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors duration-200 cursor-default"
-                                                    >
-                                                        {item}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </SpotlightCard>
-                                </TiltCard>
-                            </Reveal>
-                        )
-                    })}
-                </div>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </Reveal>
             </div>
         </SectionWrapper>
     )

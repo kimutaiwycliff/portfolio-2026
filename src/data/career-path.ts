@@ -12,10 +12,10 @@ export const careerPath: CareerStop[] = [
     {
         id: "somalia",
         sheet: "01",
-        place: "Southern Somalia",
-        coordinates: [42.5454, -0.3582],
+        place: "Galkayo, Puntland",
+        coordinates: [47.43, 6.77],
         period: "2021",
-        role: "Lead Surveyor — 309km highway topographic survey, KAAD Somalia",
+        role: "Lead Surveyor — 309 km Garaad–Galkayo–Tuurdibi highway survey, KAAD Somalia",
     },
     {
         id: "nairobi",
@@ -23,7 +23,7 @@ export const careerPath: CareerStop[] = [
         place: "Nairobi, Kenya",
         coordinates: [36.8219, -1.2921],
         period: "2022 — Present",
-        role: "Geospatial Engineer → Senior GIS Developer, Bell Power International / Konza Silicon",
+        role: "Software Developer → Senior Geospatial Software Engineer, Bell Power International / Konza Silicon",
     },
     {
         id: "dadaab",

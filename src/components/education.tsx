@@ -67,13 +67,13 @@ export function Education() {
                             Certifications
                         </p>
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight font-display">
-                            Always
+                            Courses &amp;
                             <br />
-                            <span className="text-primary">Learning</span>
+                            <span className="text-primary">Certificates</span>
                         </h2>
                     </Reveal>
 
-                    <div className="space-y-2.5">
+                    <div className="space-y-2">
                         {certifications.map((cert, index) => (
                             <Reveal
                                 key={index}
@@ -81,10 +81,13 @@ export function Education() {
                                 animate={{ opacity: 1, x: 0, rotate: 0 }}
                                 margin="-40px"
                                 transition={{ duration: 0.45, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                                className="flex items-center gap-3 p-4 rounded-xl bg-card border border-border hover:border-primary/30 hover:bg-primary/5 transition-all duration-200 cursor-default"
+                                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-card border border-border"
                             >
                                 <Award className="w-4 h-4 text-primary flex-shrink-0" />
-                                <span className="text-sm font-medium">{cert}</span>
+                                <span className="min-w-0">
+                                    <span className="block text-sm font-medium">{cert.name}</span>
+                                    <span className="block text-xs text-muted-foreground">{cert.issuer}</span>
+                                </span>
                             </Reveal>
                         ))}
                     </div>

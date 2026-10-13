@@ -4,13 +4,29 @@ import { z } from "zod"
 import { Resend } from "resend"
 
 const contactSchema = z.object({
-    name: z.string().min(2, "Name is required"),
-    email: z.string().email("Invalid email address"),
-    subject: z.string().min(5, "Subject must be at least 5 characters"),
-    message: z.string().min(10, "Message must be at least 10 characters"),
+    name: z.string().trim().min(2, "Name is required").max(100, "Name is too long"),
+    email: z.string().trim().email("Invalid email address").max(200),
+    subject: z.string().trim().min(5, "Subject must be at least 5 characters").max(150, "Subject is too long"),
+    message: z.string().trim().min(10, "Message must be at least 10 characters").max(5000, "Message is too long"),
 })
 
+// Visitor input goes into an HTML email, so escape it rather than trusting it.
+function escapeHtml(value: string) {
+    return value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;")
+}
+
 export async function submitContactForm(prevState: any, formData: FormData) {
+    // Honeypot: the "website" field is hidden from people, so only bots fill it.
+    // Pretend success so they don't retry.
+    if (formData.get("website")) {
+        return { success: true, message: "Email sent successfully!" }
+    }
+
     const validatedFields = contactSchema.safeParse({
         name: formData.get("name"),
         email: formData.get("email"),
@@ -44,15 +60,15 @@ export async function submitContactForm(prevState: any, formData: FormData) {
             from: process.env.EMAIL_SENDER_ADDRESS || 'Portfolio Contact Form <onboarding@resend.dev>',
             to: 'kimutaiwycliff90@gmail.com',
             replyTo: email,
-            subject: `Portfolio Inquiry: ${subject}`,
+            subject: `Portfolio Inquiry: ${subject.replace(/[\r\n]+/g, " ")}`,
             html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
         <br/>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br/>')}</p>
+        <p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>
       `
         })
 

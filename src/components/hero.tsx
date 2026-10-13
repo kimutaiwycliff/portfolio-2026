@@ -1,49 +1,39 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowDown, ArrowRight } from "lucide-react"
+import { ArrowDown, ArrowRight, Download } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import dynamic from "next/dynamic"
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect, useState, type CSSProperties } from "react"
 import { socialLinks } from "@/data/socials"
 import { profileImage } from "@/data/images"
 import { Magnetic } from "@/components/ui/magnetic"
-
-// maplibre-gl is a large dependency (~200kb) — load it only on the client,
-// after the hero has already painted, instead of blocking first render.
-const CareerMap = dynamic(
-    () => import("@/components/career-map").then((mod) => mod.CareerMap),
-    {
-        ssr: false,
-        loading: () => (
-            <div className="relative w-full h-full min-h-[320px] rounded-lg overflow-hidden border border-border">
-                <div className="absolute inset-0 graticule opacity-60" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-muted-foreground animate-pulse">
-                        Loading traverse…
-                    </span>
-                </div>
-            </div>
-        ),
-    }
-)
+import { CareerMap } from "@/components/career-map"
 
 const roles = [
-    "Geospatial Engineer",
+    "Software Engineer",
     "Full-Stack Developer",
-    "GIS Specialist",
-    "Cartographer",
+    "Backend & Mobile Developer",
+    "Geospatial Engineer",
 ]
 
+// Starts with the first role fully typed so the line is never blank on load,
+// then cycles: pause, delete, type the next one.
 function useTypewriter(words: string[], speed = 75, pauseDuration = 2200) {
     const [currentWordIndex, setCurrentWordIndex] = useState(0)
-    const [currentText, setCurrentText] = useState("")
+    const [currentText, setCurrentText] = useState(words[0])
     const [isDeleting, setIsDeleting] = useState(false)
-    const [isPaused, setIsPaused] = useState(false)
+    const [isPaused, setIsPaused] = useState(true)
 
     useEffect(() => {
-        if (isPaused) return
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+        if (isPaused) {
+            const t = setTimeout(() => {
+                setIsPaused(false)
+                setIsDeleting(true)
+            }, pauseDuration)
+            return () => clearTimeout(t)
+        }
         const currentWord = words[currentWordIndex]
 
         const timeout = setTimeout(
@@ -53,18 +43,12 @@ function useTypewriter(words: string[], speed = 75, pauseDuration = 2200) {
                         setCurrentText(currentWord.slice(0, currentText.length + 1))
                     } else {
                         setIsPaused(true)
-                        setTimeout(() => {
-                            setIsPaused(false)
-                            setIsDeleting(true)
-                        }, pauseDuration)
                     }
+                } else if (currentText.length > 0) {
+                    setCurrentText(currentText.slice(0, -1))
                 } else {
-                    if (currentText.length > 0) {
-                        setCurrentText(currentText.slice(0, -1))
-                    } else {
-                        setIsDeleting(false)
-                        setCurrentWordIndex((prev) => (prev + 1) % words.length)
-                    }
+                    setIsDeleting(false)
+                    setCurrentWordIndex((prev) => (prev + 1) % words.length)
                 }
             },
             isDeleting ? speed / 2 : speed
@@ -76,56 +60,19 @@ function useTypewriter(words: string[], speed = 75, pauseDuration = 2200) {
     return currentText
 }
 
-const container = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.1, delayChildren: 0.35 },
-    },
-}
+const delay = (s: number): CSSProperties => ({ animationDelay: `${s}s` })
 
-const item = {
-    hidden: { opacity: 0, y: 28 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.65, ease: "easeOut" as const },
-    },
-}
-
-// Per-letter cascade for the name — two lines animate as independent waves
-// instead of fading in as one solid block.
-const letterContainer = (delay: number) => ({
-    hidden: {},
-    visible: {
-        transition: { staggerChildren: 0.03, delayChildren: delay },
-    },
-})
-
-const letterVariant = {
-    hidden: { opacity: 0, y: 36, rotateX: -70 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
-    },
-}
-
-function CascadeText({ text, delay }: { text: string; delay: number }) {
+// Per-letter cascade for the name, driven by CSS so it starts on first paint.
+function CascadeText({ text, start }: { text: string; start: number }) {
     return (
-        <motion.span
-            variants={letterContainer(delay)}
-            initial="hidden"
-            animate="visible"
-            className="inline-block"
-        >
+        <span>
+            <span className="sr-only">{text}</span>
             {text.split("").map((ch, i) => (
-                <motion.span key={i} variants={letterVariant} className="inline-block">
+                <span key={i} aria-hidden className="letter-in" style={delay(start + i * 0.03)}>
                     {ch}
-                </motion.span>
+                </span>
             ))}
-        </motion.span>
+        </span>
     )
 }
 
@@ -160,61 +107,55 @@ export function Hero() {
             >
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_460px] gap-10 lg:gap-16 items-center">
                     {/* Left: text */}
-                    <motion.div
-                        variants={container}
-                        initial="hidden"
-                        animate="visible"
-                        className="space-y-6"
-                    >
+                    <div className="space-y-6">
                         {/* Label + signature avatar */}
-                        <motion.div variants={item} className="flex items-center gap-3">
+                        <div className="rise flex items-center gap-3" style={delay(0.05)}>
                             <div className="relative w-9 h-9 rounded-full overflow-hidden border border-primary/30 shrink-0">
                                 <Image
                                     src={profileImage.src}
                                     alt={profileImage.alt}
                                     fill
+                                    sizes="36px"
                                     className="object-cover"
                                     priority
                                 />
                             </div>
                             <span className="h-px w-8 bg-primary" />
                             <span className="text-[11px] font-mono text-primary tracking-[0.22em] uppercase">
-                                Geospatial × Full‑Stack
+                                Software Engineer · Geospatial
                             </span>
-                        </motion.div>
+                        </div>
 
-                        {/* Name — letter cascade, two independently-timed waves */}
+                        {/* Name */}
                         <h1
                             className="font-display font-extrabold leading-[0.9] tracking-tight uppercase"
                             style={{ perspective: 600 }}
                         >
                             <span className="block text-[clamp(3.2rem,9vw,7.5rem)] text-foreground">
-                                <CascadeText text="WYCLIFF" delay={0.4} />
+                                <CascadeText text="WYCLIFF" start={0.1} />
                             </span>
                             <span className="block text-[clamp(3.2rem,9vw,7.5rem)] text-primary">
-                                <CascadeText text="KIMUTAI" delay={0.65} />
+                                <CascadeText text="KIMUTAI" start={0.3} />
                             </span>
                         </h1>
 
                         {/* Typewriter role */}
-                        <motion.div variants={item} className="h-8 flex items-center gap-2">
+                        <div className="rise h-8 flex items-center gap-2" style={delay(0.2)}>
                             <span className="text-lg md:text-xl text-muted-foreground font-medium">
                                 {typewriterText}
                                 <span className="inline-block w-[2px] h-5 bg-primary ml-0.5 align-middle animate-pulse" />
                             </span>
-                        </motion.div>
+                        </div>
 
                         {/* Bio */}
-                        <motion.p
-                            variants={item}
-                            className="text-muted-foreground leading-relaxed max-w-md"
-                        >
-                            Bridging spatial intelligence and modern web engineering to build
-                            systems that transform geographic data into actionable insights.
-                        </motion.p>
+                        <p className="rise text-muted-foreground leading-relaxed max-w-md" style={delay(0.25)}>
+                            I build web, mobile and backend systems end to end, from offline-first
+                            point-of-sale apps to national land and climate-risk platforms. I trained
+                            as a surveyor, so maps are my speciality.
+                        </p>
 
-                        {/* CTAs — drift toward the cursor within reach */}
-                        <motion.div variants={item} className="flex flex-wrap gap-3">
+                        {/* CTAs */}
+                        <div className="rise flex flex-wrap gap-3" style={delay(0.3)}>
                             <Magnetic>
                                 <Link
                                     href="#projects"
@@ -225,20 +166,20 @@ export function Hero() {
                                 </Link>
                             </Magnetic>
                             <Magnetic>
-                                <Link
-                                    href="#contact"
+                                <a
+                                    href="/CV.pdf"
+                                    target="_blank"
+                                    rel="noreferrer"
                                     className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-border text-muted-foreground hover:text-foreground hover:border-primary/40 text-sm font-medium transition-all duration-200"
                                 >
-                                    Get in Touch
-                                </Link>
+                                    <Download className="w-4 h-4" />
+                                    Download CV
+                                </a>
                             </Magnetic>
-                        </motion.div>
+                        </div>
 
                         {/* Socials */}
-                        <motion.div
-                            variants={item}
-                            className="flex items-center gap-5 pt-1"
-                        >
+                        <div className="rise flex items-center gap-5 pt-1" style={delay(0.35)}>
                             {socialLinks.map((social) => (
                                 <Link
                                     key={social.name}
@@ -256,42 +197,30 @@ export function Hero() {
                             <span className="text-xs text-muted-foreground font-mono">
                                 Nairobi, KE
                             </span>
-                        </motion.div>
-                    </motion.div>
+                        </div>
+                    </div>
 
                     {/* Right: career map — the signature element */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-                        className="relative"
-                    >
+                    <div className="rise relative" style={delay(0.2)}>
                         <div className="mb-2 flex items-center justify-between font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
                             <span>Field Log — Career Traverse</span>
                             <span className="text-primary">1:24,000,000</span>
                         </div>
                         <CareerMap />
-                    </motion.div>
+                    </div>
                 </div>
             </motion.div>
 
             {/* ── Scroll indicator ── */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.6, duration: 0.5 }}
-                className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
+            <div
+                className="rise hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
+                style={delay(1.2)}
             >
                 <span className="text-[10px] text-muted-foreground font-mono tracking-[0.25em]">
                     SCROLL
                 </span>
-                <motion.div
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-                >
-                    <ArrowDown className="w-4 h-4 text-muted-foreground" />
-                </motion.div>
-            </motion.div>
+                <ArrowDown className="w-4 h-4 text-muted-foreground animate-bounce" />
+            </div>
         </section>
     )
 }

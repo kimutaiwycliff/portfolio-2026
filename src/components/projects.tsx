@@ -37,8 +37,9 @@ export function Projects() {
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="text-sm text-muted-foreground max-w-xs md:text-right"
                     >
-                        A selection of projects I&apos;m particularly proud of — GIS tools,
-                        dashboards, and full-stack apps, all shipped.
+                        Products I&apos;ve shipped and geospatial systems I&apos;ve built:
+                        offline-first SaaS, data platforms and maps. The first two have full
+                        case studies.
                     </Reveal>
                 </div>
 

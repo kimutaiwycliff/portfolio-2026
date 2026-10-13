@@ -8,7 +8,7 @@ import { SectionWrapper } from "@/components/section-wrapper"
 import { SheetLabel } from "@/components/sheet-frame"
 import { Magnetic } from "@/components/ui/magnetic"
 import { Reveal } from "@/components/ui/reveal"
-import { Mail, MapPin, Phone, Send, ArrowUpRight } from "lucide-react"
+import { Download, MapPin, Phone, Send, ArrowUpRight } from "lucide-react"
 import { WhatsAppIcon } from "@/components/icons/whatsapp-icon"
 import { useActionState, useEffect } from "react"
 import { submitContactForm } from "@/actions/contact"
@@ -45,13 +45,13 @@ export function Contact() {
                         <span className="text-muted-foreground">Contact</span>
                     </p>
                     <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-5 font-display">
-                        Let&apos;s Build
+                        Let&apos;s
                         <br />
-                        <span className="text-primary">Something Great</span>
+                        <span className="text-primary">Talk</span>
                     </h2>
                     <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto mb-6">
-                        Open to geospatial engineering, full-stack development, and
-                        interesting collaborations.
+                        Open to software engineering roles (web, mobile, backend) and
+                        geospatial work. Email is the quickest way to reach me.
                     </p>
 
                     {/* Big email CTA — stamps down like ink on a field form */}
@@ -79,12 +79,6 @@ export function Contact() {
                         className="space-y-6"
                     >
                         {[
-                            {
-                                icon: Mail,
-                                label: "Email",
-                                value: contactDetails.email,
-                                href: `mailto:${contactDetails.email}`,
-                            },
                             {
                                 icon: Phone,
                                 label: "Phone",
@@ -147,20 +141,15 @@ export function Contact() {
                             ))}
                         </div>
 
-                        {/* Map — tinted toward the field-atlas palette instead of default OSM colors */}
-                        <div className="relative w-full h-44 rounded-md overflow-hidden border border-border">
-                            <iframe
-                                width="100%"
-                                height="100%"
-                                src={contactDetails.mapUrl}
-                                title="Nairobi Map"
-                                style={{
-                                    border: 0,
-                                    filter: "grayscale(0.85) sepia(0.35) hue-rotate(45deg) saturate(1.3) brightness(0.85) contrast(1.05)",
-                                }}
-                            />
-                            <div className="absolute inset-0 graticule pointer-events-none opacity-40" />
-                        </div>
+                        <a
+                            href="/CV.pdf"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+                        >
+                            <Download className="w-4 h-4" />
+                            Download my CV (PDF)
+                        </a>
                     </Reveal>
 
                     {/* Form */}
@@ -171,6 +160,11 @@ export function Contact() {
                         className="rounded-lg bg-card border border-border p-4 sm:p-6 md:p-8"
                     >
                         <form action={formAction} className="space-y-5">
+                            {/* Honeypot — hidden from people and screen readers; bots fill it in */}
+                            <div aria-hidden className="absolute -left-[9999px] w-px h-px overflow-hidden">
+                                <label htmlFor="website">Website</label>
+                                <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                            </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
                                     <Label

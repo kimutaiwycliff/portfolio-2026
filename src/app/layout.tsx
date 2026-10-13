@@ -33,9 +33,9 @@ const geistMono = Geist_Mono({
     display: "swap",
 });
 
-const title = "Wycliff Kimutai | Geospatial Software Engineer";
+const title = "Wycliff Kimutai | Software Engineer: Web, Mobile, Backend & Geospatial";
 const description =
-    "Wycliff Kimutai — Geospatial Software Engineer in Nairobi, Kenya. Spatial data pipelines, PostGIS/GeoServer services, QGIS tooling and web maps for land administration and climate risk.";
+    "Wycliff Kimutai is a software engineer in Nairobi, Kenya, building web, mobile and backend systems end to end, with a specialty in geospatial software: offline-first SaaS, PostGIS/GeoServer services and data platforms.";
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),

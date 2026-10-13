@@ -4,6 +4,26 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
+import type { ReactNode } from "react"
+
+function SectionLabel({ children }: { children: ReactNode }) {
+    return (
+        <h2 className="text-[11px] font-mono text-primary tracking-[0.2em] uppercase">{children}</h2>
+    )
+}
+
+function BulletList({ items }: { items: string[] }) {
+    return (
+        <ul className="space-y-2">
+            {items.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                    <span className="mt-2.5 w-1 h-1 rounded-full bg-primary/60 flex-shrink-0" />
+                    <span>{item}</span>
+                </li>
+            ))}
+        </ul>
+    )
+}
 
 export function generateStaticParams() {
     return projects.map((p) => ({ slug: p.id }))
@@ -28,13 +48,13 @@ export async function generateMetadata({
             description: project.description,
             url: `/projects/${project.id}`,
             type: "article",
-            images: [{ url: project.imageUrl }],
+            images: project.imageUrl ? [{ url: project.imageUrl }] : undefined,
         },
         twitter: {
             card: "summary_large_image",
             title: project.title,
             description: project.description,
-            images: [project.imageUrl],
+            images: project.imageUrl ? [project.imageUrl] : undefined,
         },
     }
 }
@@ -50,6 +70,7 @@ export default async function ProjectCaseStudyPage({
 
     if (!project) notFound()
 
+    const cs = project.caseStudy
     const sheetNumber = String(index + 1).padStart(2, "0")
     const sheetTotal = String(projects.length).padStart(2, "0")
 
@@ -111,27 +132,73 @@ export default async function ProjectCaseStudyPage({
                 </div>
 
                 {/* Screenshot */}
-                <div className="relative aspect-[16/10] rounded-lg overflow-hidden border border-border mb-10">
-                    <Image
-                        src={project.imageUrl}
-                        alt={`${project.title} screenshot`}
-                        fill
-                        className="object-cover object-top"
-                        priority
-                    />
-                </div>
+                {project.imageUrl && (
+                    <div className="relative aspect-[16/10] rounded-lg overflow-hidden border border-border mb-10">
+                        <Image
+                            src={project.imageUrl}
+                            alt={`${project.title} screenshot`}
+                            fill
+                            sizes="(min-width: 1024px) 976px, 100vw"
+                            className="object-cover object-top"
+                            priority
+                        />
+                    </div>
+                )}
 
                 <div className="grid grid-cols-1 md:grid-cols-[1fr_260px] gap-10">
                     {/* Long description */}
-                    <div className="space-y-4 text-muted-foreground leading-relaxed">
-                        <p className="text-[11px] font-mono text-primary tracking-[0.2em] uppercase mb-2">
-                            Field Notes
-                        </p>
-                        <p>{project.longDescription ?? project.description}</p>
+                    <div className="space-y-10 text-muted-foreground leading-relaxed">
+                        <section className="space-y-3">
+                            <SectionLabel>Overview</SectionLabel>
+                            <p>{project.longDescription ?? project.description}</p>
+                        </section>
+
+                        {cs && (
+                            <>
+                                <section className="space-y-3">
+                                    <SectionLabel>The problem</SectionLabel>
+                                    <p className="text-foreground/90 text-lg leading-relaxed">{cs.problem}</p>
+                                </section>
+
+                                <section className="space-y-3">
+                                    <SectionLabel>Constraints</SectionLabel>
+                                    <BulletList items={cs.constraints} />
+                                </section>
+
+                                <section className="space-y-5">
+                                    <SectionLabel>Key decisions</SectionLabel>
+                                    <ol className="space-y-6">
+                                        {cs.decisions.map((d, i) => (
+                                            <li key={d.title} className="grid grid-cols-[2.5rem_1fr] gap-x-2">
+                                                <span className="font-mono text-sm text-primary pt-0.5">
+                                                    {String(i + 1).padStart(2, "0")}
+                                                </span>
+                                                <div>
+                                                    <h3 className="font-display font-bold text-foreground mb-1">{d.title}</h3>
+                                                    <p>{d.body}</p>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ol>
+                                </section>
+
+                                <section className="space-y-3">
+                                    <SectionLabel>Outcome</SectionLabel>
+                                    <BulletList items={cs.outcome} />
+                                </section>
+
+                                {cs.next && (
+                                    <section className="space-y-3">
+                                        <SectionLabel>What I&apos;d do next</SectionLabel>
+                                        <BulletList items={cs.next} />
+                                    </section>
+                                )}
+                            </>
+                        )}
                     </div>
 
                     {/* Tech stack */}
-                    <div>
+                    <div className="md:sticky md:top-28 self-start">
                         <p className="text-[11px] font-mono text-primary tracking-[0.2em] uppercase mb-3">
                             Stack
                         </p>

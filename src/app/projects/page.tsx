@@ -1,14 +1,14 @@
 "use client"
 
 import { ProjectCard } from "@/components/project-card"
-import { Category, projects } from "@/data/projects"
+import { Category, categories as projectCategories, projects } from "@/data/projects"
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
-const categories: (Category | "All")[] = ["All", "GIS", "Web", "ML", "Surveying", "DevOps"]
+const categories: (Category | "All")[] = ["All", ...projectCategories]
 
 export default function ProjectsPage() {
     const [filter, setFilter] = useState<Category | "All">("All")
@@ -55,7 +55,7 @@ export default function ProjectsPage() {
                             <span className="text-primary">Built &amp; Shipped</span>
                         </h1>
                         <p className="mt-4 text-muted-foreground text-sm max-w-lg">
-                            {projects.length} projects across GIS, full-stack web, machine learning, and geospatial tooling.
+                            {projects.length} projects: SaaS products, mobile apps, backend services and geospatial systems.
                         </p>
                     </motion.div>
 

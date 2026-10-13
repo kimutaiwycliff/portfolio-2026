@@ -11,6 +11,26 @@ interface ProjectCardProps {
     featured?: boolean
 }
 
+// For projects without a screenshot: a drawn "sheet" with the project's
+// initials and main technologies, in the site's survey-plate style.
+function ProjectPlaceholder({ project }: { project: Project }) {
+    const initials = project.title
+        .split(/[\s-]+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((w) => w[0]?.toUpperCase())
+        .join("")
+    return (
+        <div className="absolute inset-0 bg-muted/40 flex flex-col items-center justify-center gap-3" aria-hidden>
+            <div className="absolute inset-0 graticule opacity-70" />
+            <span className="relative font-display font-extrabold text-5xl text-primary/80 tracking-tight">{initials}</span>
+            <span className="relative font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground px-6 text-center">
+                {project.technologies.slice(0, 3).join(" · ")}
+            </span>
+        </div>
+    )
+}
+
 export function ProjectCard({ project, featured = false }: ProjectCardProps) {
     return (
         <SpotlightCard
@@ -25,12 +45,17 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
                     featured ? "md:w-[45%] aspect-[4/3]" : "aspect-[16/9]"
                 }`}
             >
-                <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                {project.imageUrl ? (
+                    <Image
+                        src={project.imageUrl}
+                        alt={project.title}
+                        fill
+                        sizes={featured ? "(min-width: 1024px) 400px, (min-width: 768px) 45vw, 100vw" : "(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"}
+                        className={`object-cover ${featured ? "object-left-top" : "object-top"} transition-transform duration-700 group-hover:scale-105`}
+                    />
+                ) : (
+                    <ProjectPlaceholder project={project} />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
 
                 {/* Badges */}
@@ -80,7 +105,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
                         href={`/projects/${project.id}`}
                         className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors px-3 py-1.5 rounded-lg hover:bg-muted"
                     >
-                        Case Study
+                        {project.caseStudy ? "Case study" : "Details"}
                     </Link>
                     {project.githubUrl && (
                         <Link

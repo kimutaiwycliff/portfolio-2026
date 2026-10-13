@@ -33,11 +33,14 @@ export const education: Education[] = [
     },
 ];
 
-export const certifications: string[] = [
-    "Project Management",
-    "Spatial Data Science",
-    "Python for Data Science",
-    "Digital Cartography",
-    "AWS Cloud Practitioner",
-    "Deep Learning Specialization",
+// Matches the certificates listed on the CV.
+export const certifications: { name: string; issuer: string }[] = [
+    { name: "Spatial Data Science: The New Frontier in Analytics", issuer: "Esri" },
+    { name: "Going Places with Spatial Analysis", issuer: "Esri" },
+    { name: "Cartography", issuer: "Esri" },
+    { name: "Introduction to Data Science in Python", issuer: "University of Michigan · Coursera" },
+    { name: "Python for Data Science, AI & Development", issuer: "IBM · Coursera" },
+    { name: "Tools for Data Science", issuer: "IBM · Coursera" },
+    { name: "Foundations of Project Management", issuer: "Google · Coursera" },
+    { name: "Project Initiation: Starting a Successful Project", issuer: "Google · Coursera" },
 ];

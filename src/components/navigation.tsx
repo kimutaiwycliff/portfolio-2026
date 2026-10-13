@@ -79,6 +79,15 @@ export function Navigation() {
                         )
                     })}
 
+                    <a
+                        href="/CV.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="ml-1 px-3 py-1.5 text-sm font-medium rounded-full border border-primary/40 text-primary hover:bg-primary/10 transition-colors"
+                    >
+                        CV
+                    </a>
+
                     <div className="ml-2 pl-2 border-l border-border">
                         <ModeToggle />
                     </div>
@@ -137,6 +146,15 @@ export function Navigation() {
                                     </Link>
                                 </motion.div>
                             ))}
+                            <a
+                                href="/CV.pdf"
+                                target="_blank"
+                                rel="noreferrer"
+                                onClick={() => setIsOpen(false)}
+                                className="block py-3 text-base font-medium text-primary"
+                            >
+                                Download CV
+                            </a>
                         </nav>
                     </motion.div>
                 )}

@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from "react"
 
 const stats = [
     { label: "Years Experience", value: "4+", num: 4, suffix: "+" },
-    { label: "Daily Records Processed", value: "10k+", num: 10, suffix: "k+" },
-    { label: "Field Teams Supported", value: "20+", num: 20, suffix: "+" },
+    { label: "Parcel Records Checked Daily", value: "10k+", num: 10, suffix: "k+" },
+    { label: "Kenyan Counties Served", value: "47", num: 47, suffix: "" },
     { label: "Projects Shipped", value: "15+", num: 15, suffix: "+" },
 ]
 
@@ -73,24 +73,28 @@ export function About() {
                 >
                     <SheetLabel index="01" title="About Me" coordinate="-1.2921°S, 36.8219°E" />
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight mb-6 font-display">
-                        Where Maps Meet
+                        From Field Surveys
                         <br />
-                        <span className="text-primary">Modern Software</span>
+                        <span className="text-primary">to Production Software</span>
                     </h2>
 
                     <p className="text-muted-foreground leading-relaxed mb-4">
                         I&apos;m a{" "}
-                        <span className="text-foreground font-semibold">
-                            Geospatial Software Engineer
-                        </span>{" "}
-                        who started out as a surveyor. I build the systems that move
-                        spatial data from the field to the people making decisions with it.
+                        <span className="text-foreground font-semibold">software engineer</span>{" "}
+                        who started out as a surveyor on a 309 km highway in Somalia. Since 2022
+                        I&apos;ve worked on Ardhisasa, Kenya&apos;s national land information system,
+                        where I lead the QGIS plugin government surveyors use every day and run the
+                        GeoServer and PostGIS services behind it.
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                        Outside that I build products end to end: offline-first point-of-sale
+                        systems with Android, desktop and web clients, multi-tenant SaaS for
+                        pharmacies and insurance agents, and open geospatial data platforms.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-                        With a background in Geomatics Engineering and advanced analytics, I
-                        specialize in creating high-performance web applications that visualize
-                        complex spatial data, automate workflows, and drive decision-making for
-                        land administration and urban planning.
+                        I care most about the unglamorous parts: data that stays correct when the
+                        network doesn&apos;t, systems that can be audited, and deployments someone
+                        else can restore from a single command.
                     </p>
                 </Reveal>
 
@@ -114,7 +118,7 @@ export function About() {
                             </div>
 
                             <div className="relative mt-8 pt-6 border-t border-border flex flex-wrap gap-2">
-                                {["ArcGIS Pro", "React / Next.js", "Python"].map((skill) => (
+                                {["TypeScript", "Python", "PostgreSQL / PostGIS", "React / React Native"].map((skill) => (
                                     <span
                                         key={skill}
                                         className="px-3 py-1 rounded-full bg-background/60 border border-border text-xs font-mono text-muted-foreground"
