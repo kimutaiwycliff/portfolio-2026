@@ -7,9 +7,9 @@ import { motion, useInView, useMotionValue, useTransform, animate } from "framer
 import { useEffect, useRef, useState } from "react"
 
 const stats = [
-    { label: "Years Experience", value: "3+", num: 3, suffix: "+" },
+    { label: "Years Experience", value: "4+", num: 4, suffix: "+" },
     { label: "Daily Records Processed", value: "10k+", num: 10, suffix: "k+" },
-    { label: "Field Teams Led", value: "20+", num: 20, suffix: "+" },
+    { label: "Field Teams Supported", value: "20+", num: 20, suffix: "+" },
     { label: "Projects Shipped", value: "15+", num: 15, suffix: "+" },
 ]
 
@@ -81,14 +81,10 @@ export function About() {
                     <p className="text-muted-foreground leading-relaxed mb-4">
                         I&apos;m a{" "}
                         <span className="text-foreground font-semibold">
-                            Geospatial Data Scientist
+                            Geospatial Software Engineer
                         </span>{" "}
-                        and{" "}
-                        <span className="text-foreground font-semibold">
-                            Full-Stack Developer
-                        </span>{" "}
-                        with a passion for building systems that bridge the gap between
-                        physical location and digital intelligence.
+                        who started out as a surveyor. I build the systems that move
+                        spatial data from the field to the people making decisions with it.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
                         With a background in Geomatics Engineering and advanced analytics, I

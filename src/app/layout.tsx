@@ -33,9 +33,9 @@ const geistMono = Geist_Mono({
     display: "swap",
 });
 
-const title = "Wycliff Kimutai | Full-Stack Developer & GIS / Geospatial Engineer";
+const title = "Wycliff Kimutai | Geospatial Software Engineer";
 const description =
-    "Wycliff Kimutai — Full-Stack Developer, GIS Analyst, and Geospatial Engineer based in Nairobi, Kenya. Building web maps, spatial data systems, and production GIS software with React, Next.js, PostGIS, and QGIS.";
+    "Wycliff Kimutai — Geospatial Software Engineer in Nairobi, Kenya. Spatial data pipelines, PostGIS/GeoServer services, QGIS tooling and web maps for land administration and climate risk.";
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),

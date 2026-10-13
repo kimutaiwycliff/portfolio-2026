@@ -16,16 +16,17 @@ export interface Project {
 
 export const projects: Project[] = [
     {
-        id: "pharmatrack",
-        title: "PharmaTrack",
-        description: "Multi-tenant pharmacy management SaaS for Kenya — offline-capable POS with M-Pesa STK push, batch/expiry-aware inventory with FEFO consumption, a PPB controlled-substances register, clinical appointment reminders, and a platform console for billing and tenant operations.",
-        longDescription: "A production-grade, self-hosted SaaS that Kenyan pharmacies run their day-to-day on. The POS works offline via Dexie/IndexedDB with an idempotent sale queue that flushes on reconnect, and accepts cash, M-Pesa STK push, card, and split payments. Inventory tracks batches, expiry dates and cost prices with FEFO consumption on every sale, plus a controlled-substances register for PPB compliance. Every table is tenant-scoped with Postgres Row-Level Security enforced at the database level, not just in application code. Appointments for recurring clinical visits (vaccinations, family planning) trigger automatic SMS/email/WhatsApp reminders. The SaaS layer includes a platform console for provisioning pharmacies, gating suspended tenants, and automated billing via Paystack.",
-        category: "Web",
-        technologies: ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Drizzle ORM", "Better Auth", "Redis", "BullMQ", "MinIO", "Paystack", "Docker"],
-        imageUrl: "/projects/pharmatrack.png",
-        liveUrl: "https://pharmatrack.co.ke",
+        id: "dadaab-climate-risk-dashboard",
+        title: "Dadaab Climate Risk Dashboard",
+        description: "Production-grade GIS web app for real-time climate hazard monitoring in the Dadaab refugee complex, Kenya. Integrates 5 live APIs — NASA FIRMS fire detections, USGS seismic data, Open-Meteo weather, UNHCR refugee population, and OpenStreetMap Overpass — with interactive MapLibre layers, QGIS-style attribute tables, and drag-to-reorder layer management.",
+        longDescription: "Built for disaster risk reduction (DRR) decision-making in one of the world's largest refugee settlements. Features include: NASA FIRMS VIIRS fire hotspot mapping, USGS earthquake monitoring, UNHCR refugee population trends, OSM health facilities and water points from Overpass API, drought zone (IPC/FEWS NET) and flood-prone area overlays, composite risk grid, dark/light themes with auto-synced basemaps (Dark Matter, OSM, Voyager, Satellite), QGIS-style attribute table with sort/search/zoom-to-feature, and layer drag-to-reorder.",
+        category: "GIS",
+        technologies: ["SvelteKit", "Svelte 5", "MapLibre GL JS", "TypeScript", "Tailwind CSS v4", "NASA FIRMS", "USGS API", "UNHCR API", "Overpass API", "Open-Meteo"],
+        imageUrl: "/projects/dadaab-climate-risk-dashboard.png",
+        githubUrl: "https://github.com/kimutaiwycliff/dadaab-climate-risk-dashboard",
+        liveUrl: "https://dadaab-climate-risk-dashboard.vercel.app/",
         featured: true,
-        date: "2026",
+        date: "2026"
     },
     {
         id: "ardhisasa-plugin",
@@ -34,7 +35,6 @@ export const projects: Project[] = [
         category: "GIS",
         technologies: ["Python", "PyQt", "QGIS API", "XML"],
         imageUrl: "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=1931&auto=format&fit=crop", // Map/Blueprint
-        githubUrl: "https://github.com/wycliffkimutai",
         featured: false,
         date: "2023"
     },
@@ -47,19 +47,6 @@ export const projects: Project[] = [
         imageUrl: "/projects/urban-heat-island-explorer.png",
         githubUrl: "https://github.com/kimutaiwycliff/urban-heat-island-explorer",
         liveUrl: "https://urban-heat-island-explorer.vercel.app",
-        featured: true,
-        date: "2026"
-    },
-    {
-        id: "dadaab-climate-risk-dashboard",
-        title: "Dadaab Climate Risk Dashboard",
-        description: "Production-grade GIS web app for real-time climate hazard monitoring in the Dadaab refugee complex, Kenya. Integrates 5 live APIs — NASA FIRMS fire detections, USGS seismic data, Open-Meteo weather, UNHCR refugee population, and OpenStreetMap Overpass — with interactive MapLibre layers, QGIS-style attribute tables, and drag-to-reorder layer management.",
-        longDescription: "Built for disaster risk reduction (DRR) decision-making in one of the world's largest refugee settlements. Features include: NASA FIRMS VIIRS fire hotspot mapping, USGS earthquake monitoring, UNHCR refugee population trends, OSM health facilities and water points from Overpass API, drought zone (IPC/FEWS NET) and flood-prone area overlays, composite risk grid, dark/light themes with auto-synced basemaps (Dark Matter, OSM, Voyager, Satellite), QGIS-style attribute table with sort/search/zoom-to-feature, and layer drag-to-reorder.",
-        category: "GIS",
-        technologies: ["SvelteKit", "Svelte 5", "MapLibre GL JS", "TypeScript", "Tailwind CSS v4", "NASA FIRMS", "USGS API", "UNHCR API", "Overpass API", "Open-Meteo"],
-        imageUrl: "/projects/dadaab-climate-risk-dashboard.png",
-        githubUrl: "https://github.com/kimutaiwycliff/dadaab-climate-risk-dashboard",
-        liveUrl: "https://dadaab-climate-risk-dashboard.vercel.app/",
         featured: true,
         date: "2026"
     },
@@ -101,6 +88,41 @@ export const projects: Project[] = [
         date: "2026"
     },
     {
+        id: "geospatial-stack",
+        title: "geospatial-stack — Spatial Data Publishing Platform",
+        description: "Docker-first platform for publishing geographic data: uploads are validated (geometry, CRS, schema), run through a Celery ETL into PostGIS and GeoParquet, and served as Martin/PMTiles vector tiles behind a FastAPI with an authenticated admin.",
+        longDescription: "Every dataset carries source, licence and a sensitivity classification (public, restricted, withheld — defaulting to the most protective) with a full audit trail of changes. Admins can restyle and publish layers without re-tiling or redeploying. Runs as one Docker Compose stack with self-hosted OSM basemap tiles, MinIO/R2 object storage, Redis and Celery workers, Caddy, and Prometheus, Grafana and Loki for monitoring. Includes backup/restore and incident runbooks.",
+        category: "GIS",
+        technologies: ["PostGIS", "DuckDB", "GeoParquet", "FastAPI", "Celery", "Redis", "Martin", "PMTiles", "MapLibre GL JS", "React", "MinIO", "Docker", "Prometheus", "Grafana"],
+        imageUrl: "https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1974&auto=format&fit=crop",
+        githubUrl: "https://github.com/kimutaiwycliff/geospatial-stack",
+        featured: true,
+        date: "2026"
+    },
+    {
+        id: "gis-stack-backend",
+        title: "GIS Backend Stack",
+        description: "Self-hosted spatial backend: PostGIS, GeoServer for OGC WMS/WFS/WCS/WMTS, Martin vector tiles and a Rust + GDAL ingest service with a browser upload UI, all behind one Nginx entry point.",
+        category: "GIS",
+        technologies: ["PostGIS", "GeoServer", "OGC WMS/WFS", "Martin", "Rust", "GDAL", "Nginx", "Docker"],
+        imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1934&auto=format&fit=crop",
+        githubUrl: "https://github.com/kimutaiwycliff/gis-stack-backend",
+        featured: false,
+        date: "2026"
+    },
+    {
+        id: "pharmatrack",
+        title: "PharmaTrack",
+        description: "Multi-tenant pharmacy management SaaS for Kenya — offline-capable POS with M-Pesa STK push, batch/expiry-aware inventory with FEFO consumption, a PPB controlled-substances register, clinical appointment reminders, and a platform console for billing and tenant operations.",
+        longDescription: "A production-grade, self-hosted SaaS that Kenyan pharmacies run their day-to-day on. The POS works offline via Dexie/IndexedDB with an idempotent sale queue that flushes on reconnect, and accepts cash, M-Pesa STK push, card, and split payments. Inventory tracks batches, expiry dates and cost prices with FEFO consumption on every sale, plus a controlled-substances register for PPB compliance. Every table is tenant-scoped with Postgres Row-Level Security enforced at the database level, not just in application code. Appointments for recurring clinical visits (vaccinations, family planning) trigger automatic SMS/email/WhatsApp reminders. The SaaS layer includes a platform console for provisioning pharmacies, gating suspended tenants, and automated billing via Paystack.",
+        category: "Web",
+        technologies: ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Drizzle ORM", "Better Auth", "Redis", "BullMQ", "MinIO", "Paystack", "Docker"],
+        imageUrl: "/projects/pharmatrack.png",
+        liveUrl: "https://pharmatrack.co.ke",
+        featured: true,
+        date: "2026",
+    },
+    {
         id: "route-explorer",
         title: "Route Explorer",
         description: "Full-featured ORS-powered mapping app: multi-waypoint directions with 9 travel profiles, avoid-feature toggles, up to 3 alternative routes, isochrone reachability maps, travel-time matrix, POI discovery, multi-stop route optimisation (VRP/TSP), elevation profiles, and GPX/GeoJSON export.",
@@ -119,7 +141,6 @@ export const projects: Project[] = [
         category: "Web",
         technologies: ["SvelteKit", "Svelte 5", "Supabase", "Anthropic Claude", "TypeScript", "Tailwind CSS", "shadcn-svelte", "PostgreSQL"],
         imageUrl: "/projects/job-hunter-ai.png",
-        githubUrl: "https://github.com/kimutaiwycliff/job-hunter",
         liveUrl: "https://job-hunter-nu.vercel.app/",
         featured: false,
         date: "2026"
