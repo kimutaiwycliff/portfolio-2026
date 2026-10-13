@@ -94,7 +94,7 @@ export default async function ProjectCaseStudyPage({
                         </span>
                         <span className="h-px w-8 bg-primary" />
                         <span className="text-muted-foreground">{project.category}</span>
-                        <span className="text-muted-foreground/60">· {project.date}</span>
+                        <span className="text-muted-foreground">· {project.date}</span>
                     </p>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight font-display mb-4">
                         {project.title}
