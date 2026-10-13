@@ -20,7 +20,7 @@ export function SheetLabel({ index, total = "06", title, coordinate }: SheetLabe
             <span className="h-px w-8 bg-primary" />
             <span className="text-muted-foreground">{title}</span>
             {coordinate && (
-                <span className="ml-auto text-muted-foreground/70 hidden sm:inline">{coordinate}</span>
+                <span className="ml-auto text-muted-foreground hidden sm:inline">{coordinate}</span>
             )}
         </div>
     )
